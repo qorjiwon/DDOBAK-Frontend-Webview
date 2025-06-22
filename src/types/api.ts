@@ -6,6 +6,7 @@ export interface ResponseDTO<T> {
   success: boolean;      // 요청 성공 여부
   code: number;          // 비즈니스 상태 코드 (state code)
   message: string;       // 사용자·개발자 참고용 메시지
+  userMessage: string | null, // 사용자에게 보여줄 메시지
   data: T;               // 실제 응답 데이터
   timestamp: string;     // 응답 시각 ISO 8601 UTC 타임스탬프
   trace_id: string;      // 로그/디버깅용 추적 ID
@@ -15,12 +16,19 @@ export interface ResponseDTO<T> {
  * 계약서 분석 결과 DTO  
  */
 export interface ContractAnalysisDTO {
-  originContent: string;       // OCR 전문 텍스트
-  summary: string;             // 대표 요약문
+  originContent: string;       // 계약서 OCR 전문 텍스트
+  summary: string;             // 계약서 대표 요약문
+  ddobakCommentary: {
+    overallComment: string;    // 또박이 한마디
+    warningComment: string;    // 주의 사항 요약
+    advice: string;            // 또박이의 조언
+  };
   toxics: Array<{
+    title: string;             // 주의 조항 헤드라인
     clause: string;            // 독소 조항 문장
     reason: string;            // 독소 판단 근거
-    warnLevel: number;         // 위험 등급 (1~5)
+    reasonReference: string;   // 실제 법적 근거
+    warnLevel: number;         // 위험 수준 (1~5 등급)
   }>;
 }
 
