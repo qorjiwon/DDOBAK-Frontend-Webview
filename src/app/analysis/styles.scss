@@ -15,3 +15,18 @@
         linear-gradient(0deg, #1F79FF1A, #1F79FF1A),
         linear-gradient(0deg, #ffffff, #ffffff);
 }
+
+
+/* Bottom Sheet Styles */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out forwards;
+}
