@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './styles.scss';
-import { ContractAnalysisDTO } from '../../types/api';
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ContractAnalysisDTO } from '@/types/api';
+import { ChevronDown } from "lucide-react";
+import { createPortal } from 'react-dom';
 
 // 임시 데이터
 const tempAnalysisData: ContractAnalysisDTO = {
@@ -18,7 +19,7 @@ const tempAnalysisData: ContractAnalysisDTO = {
             title: "근무 장소 및 직무 변경 조항",
             clause: "상기 근무장소 및 해당 직무는 회사의 필요에 의하여 변경될 수 있으며 직원은 이에 동의한다.",
             reason: "회사가 일방적으로 근무 장소와 직무를 변경할 수 있다는 조항은 근로자의 권리를 침해할 수 있습니다. 특히 사회 초년생의 경우, 이에 대해 이의를 제기하기 어려울 수 있습니다.",
-            reasonReference: "근로기준법 제14조",
+            reasonReference: "근로자의 동의 없이 일방적으로 근무지를 변경하는 행위는 위법하다는 판례가 있습니다. (서울행법 2017구합12345)\n\n근로기준법 제17조는 근로조건의 명시를 규정하고 있으며, 모호한 조항은 근로자에게 불리하게 작용할 수 없습니다.\n\n고의 또는 중대한 과실의 해석 범위는 사례에 따라 달라지며, 일반적인 실수로 해석될 경우 과도한 손해배상 청구로 이어질 수 있습니다.",
             warnLevel: 3
         },
         {
@@ -47,10 +48,6 @@ interface Toxic {
 }
 
 const ContractAnalysis: React.FC = () => {
-    const handleShowReference = (ref: string) => {
-        // “근거보기” 클릭 시 실제 근거를 보여주는 로직을 여기에 구현
-        alert(`근거: ${ref}`);
-    };
     return (
         <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800">
             {/* Header */}
@@ -133,7 +130,29 @@ const ContractAnalysis: React.FC = () => {
 };
 
 const ToxicCard: React.FC<{ idx: number; item: Toxic }> = ({ idx, item }) => {
-    const [expanded, setExpanded] = useState(false);
+    const [sheetVisible, setSheetVisible] = useState(false);
+    const [selected, setSelected] = useState<{ title: string; content: string } | null>(null);
+
+    const handleShowReference = (title: string, content: string) => {
+        setSelected({ title, content });
+        setSheetVisible(true);
+    };
+
+    const closeSheet = () => {
+        setSheetVisible(false);
+        setSelected(null);
+    };
+
+    useEffect(() => {
+        if (selected) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [selected]);
 
     return (
         <div className="bg-white rounded-xl p-6 font-medium space-y-3">
@@ -160,23 +179,101 @@ const ToxicCard: React.FC<{ idx: number; item: Toxic }> = ({ idx, item }) => {
                 </p>
             </div>
             <button
-                onClick={() => setExpanded((v) => !v)}
+                onClick={() => handleShowReference(item.title, item.reasonReference)}
                 className="px-[10px] py-1 bg-[#FF49490D] flex items-center text-red-500 text-sm rounded-full"
             >
                 근거보기
-                {expanded ? (
-                    <ChevronUp className="ml-1 h-4 w-4" />
-                ) : (
-                    <ChevronDown className="ml-1 h-4 w-4" />
-                )}
+                <ChevronDown className="ml-1 h-4 w-4" />
             </button>
-            {expanded && (
-                <p className="mt-2 text-gray-500 text-xs">
-                    {item.reasonReference}
-                </p>
+
+            {/* BottomSheet 모달 */}
+            {selected && (
+                <BottomSheet
+                    visible={sheetVisible}
+                    onClose={closeSheet}
+                    content={selected.content}
+                />
             )}
         </div>
     );
 };
+
+const BottomSheet: React.FC<{
+    visible: boolean;
+    onClose: () => void;
+    content: string;
+}> = ({ visible, onClose, content }) => {
+
+    const sheetRef = useRef<HTMLDivElement>(null);
+    const startYRef = useRef(0);
+    const [dragY, setDragY] = useState(0);
+    const [dragging, setDragging] = useState(false);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        startYRef.current = e.touches[0].clientY;
+        setDragging(true);
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        const delta = e.touches[0].clientY - startYRef.current;
+        if (delta > 0) setDragY(delta);
+        console.log("Dragging:", delta);
+    };
+
+    const handleTouchEnd = () => {
+        setDragging(false);
+        console.log("Drag ended at:", dragY);
+        if (dragY > 100) {
+            // 충분히 드래그하면 닫기
+            setDragY(0);
+            onClose();
+        } else {
+            // 아니면 원위치
+            setDragY(0);
+        }
+    };
+
+    if (!visible) return null;
+    return (
+        createPortal(
+            <>
+                {/* Overlay */}
+                <div
+                    className="fixed inset-0 bg-[#1A1A1A4D] bg-opacity-30 z-40"
+                    onClick={onClose}
+                />
+
+                {/* Bottom sheet */}
+                <div
+                    ref={sheetRef}
+                    className={`fixed bottom-20 left-0 w-full max-h-[80vh] px-6 pb-11 bg-white rounded-t-2xl z-50
+                    ${dragging ? '' : 'animate-slide-up'}`}
+                    style={dragging ? { transform: `translateY(${dragY}px)` } : undefined}
+                >
+                    <div className="w-full flex justify-center py-3 mb-[16px]"
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                    >
+                        <div className="w-21 h-1 bg-[#E4E4E4] rounded-full" />
+                    </div>
+
+                    <div className="overflow-y-auto flex flex-col gap-3">
+                        <h3 className="text-2xl font-bold">근거 상세보기</h3>
+                        <div>
+                            <span className="inline-block bg-[#EFEFEF] text-[#616161] text-xs px-2 py-1 rounded-full">
+                                관련 판례 및 법적 기준
+                            </span>
+                        </div>
+                        <p className="text-sm text-gray-700 whitespace-pre-line">
+                            {content}
+                        </p>
+                    </div>
+                </div>
+            </>,
+            document.body
+        )
+    )
+}
 
 export default ContractAnalysis;
