@@ -1,14 +1,18 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { use, useEffect, useRef, useState } from 'react';
 import './styles.scss';
 import { ContractAnalysisDTO } from '@/types/api';
+import { Toxic } from '@/types/contract';
 import { ChevronDown } from "lucide-react";
 import { createPortal } from 'react-dom';
+import { fetchContractAnalysis } from '@/api/api';
 
-// 임시 데이터
 const tempAnalysisData: ContractAnalysisDTO = {
     originContent: "계약서 OCR 전문 텍스트",
     summary: "이 계약서는 (주)여기어때컴퍼니와 아르바이트 근로자 간의 근로 계약을 정의합니다.",
+    analysisStatus: "success",
+    analysisDate: "2023-10-01",
+    toxicCount: 3,
     ddobakCommentary: {
         overallComment: "전체적인 조건은 나쁘지 않지만, 아래 조항들을 한 번 더 확인해보는 게 좋아요!",
         warningComment: "또박이가 보기엔, 이 계약서엔 ‘너무 회사 중심’인 조항들이 보여요!",
@@ -39,15 +43,28 @@ const tempAnalysisData: ContractAnalysisDTO = {
     ]
 };
 
-interface Toxic {
-    title: string;
-    clause: string;
-    reason: string;
-    reasonReference: string;
-    warnLevel: number;
-}
-
 const ContractAnalysis: React.FC = () => {
+  const [data, setData] = useState<ContractAnalysisDTO | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const loadAnalysis = async () => {
+            try {
+                setLoading(true);
+                const result = await fetchContractAnalysis();
+                setData(result.data);
+            } catch (err: any) {
+                console.error('API 호출 중 오류 발생:', err);
+                setError(err.message || '알 수 없는 오류');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadAnalysis();
+    }, []);
+
     return (
         <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800">
             {/* Header */}
@@ -78,7 +95,7 @@ const ContractAnalysis: React.FC = () => {
                         또박이 한마디
                     </div>
                     <p className="mt-1 text-[#1F79FF] font-medium">
-                        {`“${tempAnalysisData.ddobakCommentary.overallComment}”`}
+                        {`“${tempAnalysisData?.ddobakCommentary.overallComment}”`}
                     </p>
                 </div>
             </div>
@@ -97,7 +114,7 @@ const ContractAnalysis: React.FC = () => {
 
                 {/* Clause Cards */}
                 <div className="space-y-4">
-                    {tempAnalysisData.toxics.map((item, idx) => (
+                    {tempAnalysisData?.toxics.map((item, idx) => (
                         <ToxicCard key={idx} idx={idx} item={item} />
                     ))}
                 </div>
@@ -107,7 +124,7 @@ const ContractAnalysis: React.FC = () => {
             <div className="AdviceBox rounded-lg p-4 mx-4 mt-6 text-[#1F79FF] space-y-2">
                 <h5 className="font-bold">또박이의 조언</h5>
                 <p className="mt-1 font-medium">
-                    {`“${tempAnalysisData.ddobakCommentary.advice}”`}
+                    {`“${tempAnalysisData?.ddobakCommentary.advice}”`}
                 </p>
             </div>
 
@@ -245,7 +262,7 @@ const BottomSheet: React.FC<{
                 {/* Bottom sheet */}
                 <div
                     ref={sheetRef}
-                    className={`fixed bottom-20 left-0 w-full max-h-[80vh] px-6 pb-11 bg-white rounded-t-2xl z-50
+                    className={`fixed bottom-0 left-0 w-full max-h-[80vh] px-6 pb-11 bg-white rounded-t-2xl z-50
                     ${dragging ? '' : 'animate-slide-up'}`}
                     style={dragging ? { transform: `translateY(${dragY}px)` } : undefined}
                 >
