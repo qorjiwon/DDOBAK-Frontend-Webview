@@ -217,7 +217,6 @@ const BottomSheet: React.FC<{
     const handleTouchMove = (e: React.TouchEvent) => {
         const delta = e.touches[0].clientY - startYRef.current;
         if (delta > 0) setDragY(delta);
-        console.log("Dragging:", delta);
     };
 
     const handleTouchEnd = () => {
