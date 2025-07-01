@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import './styles.scss';
 import { fetchContractOcrResult } from '@/api/api';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
@@ -12,6 +13,7 @@ const tempOcrResult: ContractOcrHtml = {
   "htmlArray": [
   ]
 }
+
 export default function OcrCorrectionPage() {
   const [blocks, setBlocks] = useState<HtmlBlock[]>(tempOcrResult.htmlArray);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
@@ -50,23 +52,26 @@ export default function OcrCorrectionPage() {
   // }
 
   return (
-    <div className="flex flex-col bg-gray-50 min-h-screen py-4">
-      <div className="flex items-center px-4">
-        <Link href="/" className="p-2">
+    <div className="flex flex-col bg-gray-50 min-h-screen py-[5px]">
+      <div className="flex items-center px-5">
+        <Link href="/">
           <ChevronLeft size={24} />
         </Link>
       </div>
 
       <h1 className="pl-6 my-9 text-[28px] font-semibold">인식된 텍스트를 확인하세요</h1>
 
-      <div className="px-4 space-y-[10px] mb-4">
+      <div className="flex-1 px-4 space-y-[10px] mb-4">
         {blocks.map((block, idx) => (
-          <div
-            key={block.id}
-            className={
-              editingIdx !== null && editingIdx !== idx ? 'opacity-30' : 'opacity-100'
-            }
-          >
+          
+            <div
+              key={block.id}
+              className="ocr-block"
+              style={{
+                '--delay': `${idx * 0.25}s`,
+                '--target-opacity': editingIdx !== null && editingIdx !== idx ? '0.3' : '1'
+              } as React.CSSProperties}
+            >
             <textarea
               value={block.element}
               onChange={(e) => {
