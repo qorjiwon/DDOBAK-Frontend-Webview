@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './styles.scss';
 import { ContractAnalysisDTO } from '@/types/api';
 import { Toxic } from '@/types/contract';
