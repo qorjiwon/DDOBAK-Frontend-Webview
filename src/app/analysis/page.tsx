@@ -44,9 +44,9 @@ const tempAnalysisData: ContractAnalysisDTO = {
 };
 
 const ContractAnalysis: React.FC = () => {
-  const [data, setData] = useState<ContractAnalysisDTO | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+    const [data, setData] = useState<ContractAnalysisDTO | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const loadAnalysis = async () => {
@@ -68,7 +68,7 @@ const ContractAnalysis: React.FC = () => {
     return (
         <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800">
             {/* Header */}
-            <div className="mt-9 text-center">
+            <div className="pt-9 text-center">
                 <p className="text-gray-500">이 계약서에서 발견된 독소조항은</p>
                 <p className="mt-2 text-3xl font-bold text-blue-600">3개</p>
             </div>
@@ -130,14 +130,23 @@ const ContractAnalysis: React.FC = () => {
 
             {/* Footer Buttons */}
             <div className="px-4 mt-9 pb-6 space-y-3 text-[#1F79FF]">
-                <button className="w-full bg-[#1F79FF] px-4 py-4 text-white rounded-lg font-medium">
+                <button
+                    className="w-full bg-[#1F79FF] px-4 py-4 text-white rounded-lg font-medium"
+                    onClick={() => window.webkit?.messageHandlers.savePdf.postMessage(null)}
+                >
                     분석 결과 PDF로 저장
                 </button>
                 <div className="flex space-x-2">
-                    <button className="flex-1 px-4 py-4 border border-[#1F79FF] rounded-lg text-[#1F79FF] font-medium">
+                    <button
+                        className="flex-1 px-4 py-4 border border-[#1F79FF] rounded-lg text-[#1F79FF] font-medium"
+                        onClick={() => window.webkit?.messageHandlers.analyzeOther.postMessage(null)}
+                    >
                         다른 계약서 분석하기
                     </button>
-                    <button className="flex-1 px-4 py-4 border border-[#1F79FF] rounded-lg text-[#1F79FF] font-medium">
+                    <button
+                        className="flex-1 px-4 py-4 border border-[#1F79FF] rounded-lg text-[#1F79FF] font-medium"
+                        onClick={() => window.webkit?.messageHandlers.goHome.postMessage(null)}
+                    >
                         홈으로 돌아가기
                     </button>
                 </div>
