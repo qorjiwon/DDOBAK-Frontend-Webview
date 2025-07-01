@@ -35,14 +35,18 @@ export interface ContractAnalysisDTO {
   }>;
 }
 
-interface HtmlBlock {
+export type ContractAnalysisResponse = ResponseDTO<ContractAnalysisDTO>;
+
+export interface HtmlBlock {
   category: string; // html 태그
   element: string;  // HTML 개별 요소
   id: number;       // 태그에 명시된 id 번호
 }
 
-export interface ContractOcrResponse {
+export interface ContractOcrHtml {
   pageIdx: number;
   htmlEntire: string;
   htmlArray: HtmlBlock[];
 }
+
+export type ContractOcrResponse = ResponseDTO<ContractOcrHtml>;
