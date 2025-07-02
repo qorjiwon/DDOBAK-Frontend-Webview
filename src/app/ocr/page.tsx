@@ -18,7 +18,6 @@ export default function OcrCorrectionPage() {
   const [blocks, setBlocks] = useState<HtmlBlock[]>(tempOcrResult.htmlArray);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -28,7 +27,6 @@ export default function OcrCorrectionPage() {
         setBlocks(data.htmlArray);
       } catch (err: any) {
         console.error(err);
-        setError(err.message ?? "OCR 결과를 가져오는 중 오류가 발생했습니다.");
       } finally {
         setLoading(false);
       }
@@ -40,16 +38,13 @@ export default function OcrCorrectionPage() {
     el.style.height = el.scrollHeight + 'px';
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex items-center justify-center h-screen text-gray-500">
-  //       로딩 중...
-  //     </div>
-  //   );
-  // }
-  // if (error) {
-  //   return <div className="p-4 text-red-500">{error}</div>;
-  // }
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen text-gray-500">
+        로딩 중...
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col bg-gray-50 min-h-screen py-[5px]">
@@ -83,7 +78,7 @@ export default function OcrCorrectionPage() {
               onFocus={() => setEditingIdx(idx)}
               onBlur={() => setEditingIdx(null)}
               onInput={(e) => adjustHeight(e.currentTarget)}
-              ref={(el) => el && adjustHeight(el)}
+              ref={(el) => { if (el) adjustHeight(el); }}
               className="w-full bg-white rounded-lg p-3 text-sm text-gray-800 focus:outline-none overflow-hidden"
               style={{ resize: 'none' }}
             />

@@ -11,6 +11,7 @@ export async function fetchContractAnalysis(): Promise<ContractAnalysisResponse>
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
       'Content-Type': 'application/json',
+      'X-Request-Id': 'asda',
     },
   });
 
@@ -34,6 +35,7 @@ export async function fetchContractOcrResult(): Promise<ContractOcrResponse> {
     headers: {
       Authorization: `Bearer  ${process.env.NEXT_PUBLIC_API_KEY}`,
       'Content-Type': 'application/json',
+      'X-Request-Id': 'abcde-1234-fghij-5678-klmnop',
     },
   });
 

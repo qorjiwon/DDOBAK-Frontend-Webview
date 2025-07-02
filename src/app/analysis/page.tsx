@@ -7,58 +7,17 @@ import { ChevronDown } from "lucide-react";
 import { createPortal } from 'react-dom';
 import { fetchContractAnalysis } from '@/api/api';
 
-const tempAnalysisData: ContractAnalysisDTO = {
-    originContent: "계약서 OCR 전문 텍스트",
-    summary: "이 계약서는 (주)여기어때컴퍼니와 아르바이트 근로자 간의 근로 계약을 정의합니다.",
-    analysisStatus: "success",
-    analysisDate: "2023-10-01",
-    toxicCount: 3,
-    ddobakCommentary: {
-        overallComment: "전체적인 조건은 나쁘지 않지만, 아래 조항들을 한 번 더 확인해보는 게 좋아요!",
-        warningComment: "또박이가 보기엔, 이 계약서엔 ‘너무 회사 중심’인 조항들이 보여요!",
-        advice: "계약서의 모든 조항을 충분히 이해한 후 서명하세요."
-    },
-    toxics: [
-        {
-            title: "근무 장소 및 직무 변경 조항",
-            clause: "상기 근무장소 및 해당 직무는 회사의 필요에 의하여 변경될 수 있으며 직원은 이에 동의한다.",
-            reason: "회사가 일방적으로 근무 장소와 직무를 변경할 수 있다는 조항은 근로자의 권리를 침해할 수 있습니다. 특히 사회 초년생의 경우, 이에 대해 이의를 제기하기 어려울 수 있습니다.",
-            reasonReference: "근로자의 동의 없이 일방적으로 근무지를 변경하는 행위는 위법하다는 판례가 있습니다. (서울행법 2017구합12345)\n\n근로기준법 제17조는 근로조건의 명시를 규정하고 있으며, 모호한 조항은 근로자에게 불리하게 작용할 수 없습니다.\n\n고의 또는 중대한 과실의 해석 범위는 사례에 따라 달라지며, 일반적인 실수로 해석될 경우 과도한 손해배상 청구로 이어질 수 있습니다.",
-            warnLevel: 3
-        },
-        {
-            title: "불명확한 합의근무 조항",
-            clause: "다만, 필요한 경우 주말근무를 할 수 있다.",
-            reason: "주말 근무의 기준·범위·보상이 모두 명시되지 않아 무급 근로나 강제 동원으로 이어질 위험이 있어요.",
-            reasonReference: "근로기준법 제50조",
-            warnLevel: 2
-        },
-        {
-            title: "광범위한 손해배상 책임 조항",
-            clause: "직원이 고의 또는 중대한 과실로 회사에 손해를 끼친 경우 직원은 이에 대해 손해배상을 부담한다.",
-            reason: "‘중대한 과실’의 정의가 없어, 경미한 실수도 과도한 책임으로 이어질 수 있어요.",
-            reasonReference: "민법 제390조",
-            warnLevel: 2
-        }
-    ]
-};
-
 const ContractAnalysis: React.FC = () => {
     const [data, setData] = useState<ContractAnalysisDTO | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const loadAnalysis = async () => {
             try {
-                setLoading(true);
                 const result = await fetchContractAnalysis();
                 setData(result.data);
             } catch (err: any) {
                 console.error('API 호출 중 오류 발생:', err);
-                setError(err.message || '알 수 없는 오류');
             } finally {
-                setLoading(false);
             }
         };
 
@@ -95,7 +54,7 @@ const ContractAnalysis: React.FC = () => {
                         또박이 한마디
                     </div>
                     <p className="mt-1 text-[#1F79FF] font-medium">
-                        {`“${tempAnalysisData?.ddobakCommentary.overallComment}”`}
+                        {`“${data?.ddobakCommentary.overallComment}”`}
                     </p>
                 </div>
             </div>
@@ -114,7 +73,7 @@ const ContractAnalysis: React.FC = () => {
 
                 {/* Clause Cards */}
                 <div className="space-y-4">
-                    {tempAnalysisData?.toxics.map((item, idx) => (
+                    {data?.toxics.map((item, idx) => (
                         <ToxicCard key={idx} idx={idx} item={item} />
                     ))}
                 </div>
@@ -124,7 +83,7 @@ const ContractAnalysis: React.FC = () => {
             <div className="AdviceBox rounded-lg p-4 mx-4 mt-6 text-[#1F79FF] space-y-2">
                 <h5 className="font-bold">또박이의 조언</h5>
                 <p className="mt-1 font-medium">
-                    {`“${tempAnalysisData?.ddobakCommentary.advice}”`}
+                    {`“${data?.ddobakCommentary.advice}”`}
                 </p>
             </div>
 
