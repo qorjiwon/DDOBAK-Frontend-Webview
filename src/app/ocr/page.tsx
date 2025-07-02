@@ -25,7 +25,7 @@ export default function OcrCorrectionPage() {
         const res = await fetchContractOcrResult();
         const data: ContractOcrHtml = res.data;
         setBlocks(data.htmlArray);
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(err);
       } finally {
         setLoading(false);
