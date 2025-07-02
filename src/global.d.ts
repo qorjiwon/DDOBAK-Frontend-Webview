@@ -5,7 +5,7 @@ declare global {
     webkit?: {
       messageHandlers: {
         [handlerName: string]: {
-          postMessage: (message: any) => void
+          postMessage: (message: unknown) => void
         }
       }
     }
