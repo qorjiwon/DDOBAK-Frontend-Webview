@@ -27,13 +27,18 @@ const ContractAnalysis: React.FC = () => {
 
     return (
         <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800">
+            <img
+                className="w-full"
+                src="/many-found.svg"
+                alt="또박이"
+            />
             {/* Header */}
             <div className="pt-9 text-center">
-                <p className="text-gray-500">이 계약서에서 발견된 독소조항은</p>
+                <p className="text-[#9E9E9E] font-bold">이 계약서에서 발견된 독소조항은</p>
                 <p className="mt-2 text-3xl font-bold text-blue-600">3개</p>
             </div>
 
-            <div className="mt-9 mx-5 space-y-2">
+            <div className="mt-9 mx-5 space-y-[39px]">
                 {/* Summary Card */}
                 <div className="bg-[#FCFCFC] rounded-xl py-6 px-6 font-medium">
                     <h3 className="text-base font-bold text-[#616161] mb-2">요약</h3>
@@ -43,7 +48,7 @@ const ContractAnalysis: React.FC = () => {
                 </div>
 
                 {/* Note Box */}
-                <div className="NoteBox rounded-[10px] py-[18px] px-[17px] mb-[28px] flex flex-col gap-2">
+                <div className="rounded-[10px] border-[#1F79FF] border bg-[#F4F8FF] py-[18px] px-[17px] mb-[28px] flex flex-col gap-2">
                     <div className="text-[#1F79FF] font-bold rounded-lg">
                         또박이 한마디
                     </div>
@@ -51,16 +56,22 @@ const ContractAnalysis: React.FC = () => {
                         {`“${data?.ddobakCommentary.overallComment}”`}
                     </p>
                 </div>
+
+                <img
+                    className="w-[162px] mx-[50vw] -mt-12"
+                    src="/mini-ddobak.svg"
+                    alt="안경 쓴 또박이"
+                />
             </div>
 
             {/* Warning */}
             <div className="bg-[#616161] px-5 py-[28px] space-y-2">
 
                 {/* Warning Summary */}
-                <div className="WarningSummary rounded-lg p-4 grow basis-0">
+                <div className="border-[#FF4949] border bg-[#FFF6F6] rounded-lg p-4 grow basis-0">
                     <h4 className="text-[#FF4949] font-bold">주의 조항 요약</h4>
                     <p className="mt-2 text-[#FF4949] font-medium">
-                        “또박이가 보기엔, 이 계약서엔 <b>‘너무 회사 중심’</b>인 조항들이 보여요!”
+                        {`“${data?.ddobakCommentary.warningComment}”`}
                     </p>
                 </div>
 
@@ -74,15 +85,21 @@ const ContractAnalysis: React.FC = () => {
             </div>
 
             {/* Advice Box */}
-            <div className="AdviceBox rounded-lg p-4 mx-4 mt-6 text-[#1F79FF] space-y-2">
+            <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-4 mt-6 mb-14 text-[#1F79FF] space-y-2">
                 <h5 className="font-bold">또박이의 조언</h5>
                 <p className="mt-1 font-medium">
                     {`“${data?.ddobakCommentary.advice}”`}
                 </p>
             </div>
 
+            <img
+                className="w-[162px] h-[84px] mx-1 -mt-12"
+                src="/glasses-ddobak.svg"
+                alt="안경 쓴 또박이"
+            />
+
             {/* Footer Buttons */}
-            <div className="px-4 mt-9 pb-6 space-y-3 text-[#1F79FF]">
+            <div className="px-5 pb-6 space-y-3 text-[#1F79FF]">
                 <button
                     className="w-full bg-[#1F79FF] px-4 py-4 text-white rounded-lg font-medium"
                     onClick={() => window.webkit?.messageHandlers.savePdf.postMessage(null)}
