@@ -43,7 +43,7 @@ const ContractAnalysis: React.FC = () => {
                 <div className="bg-[#FCFCFC] rounded-xl py-6 px-6 font-medium">
                     <h3 className="text-base font-bold text-[#616161] mb-2">요약</h3>
                     <p>
-                        {data?.summary || "계약서 요약을 불러오는 중입니다..."}
+                        {data?.summary || "분석 결과를 불러오지 못했습니다."}
                     </p>
                 </div>
 
@@ -53,7 +53,7 @@ const ContractAnalysis: React.FC = () => {
                         또박이 한마디
                     </div>
                     <p className="mt-1 text-[#1F79FF] font-medium">
-                        {`“${data?.ddobakCommentary.overallComment}”`}
+                        { data ? `“${data?.ddobakCommentary.overallComment}”` : "..."}
                     </p>
                 </div>
 
@@ -71,7 +71,7 @@ const ContractAnalysis: React.FC = () => {
                 <div className="border-[#FF4949] border bg-[#FFF6F6] rounded-lg p-4 grow basis-0">
                     <h4 className="text-[#FF4949] font-bold">주의 조항 요약</h4>
                     <p className="mt-2 text-[#FF4949] font-medium">
-                        {`“${data?.ddobakCommentary.warningComment}”`}
+                        { data ? `“${data?.ddobakCommentary.warningComment}”` : '' }
                     </p>
                 </div>
 
@@ -88,7 +88,7 @@ const ContractAnalysis: React.FC = () => {
             <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-4 mt-6 mb-14 text-[#1F79FF] space-y-2">
                 <h5 className="font-bold">또박이의 조언</h5>
                 <p className="mt-1 font-medium">
-                    {`“${data?.ddobakCommentary.advice}”`}
+                    { data ? `“${data?.ddobakCommentary.advice}”` : "..." }
                 </p>
             </div>
 
