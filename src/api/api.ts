@@ -1,9 +1,8 @@
 import type { ContractAnalysisResponse, ContractOcrResponse } from '@/types/api';
 
 const API_BASE_PATH = process.env.NEXT_PUBLIC_API_BASE_URL!;
-
-const contractId = "467HE0DU";
-const analysisId = "DM5FEA0H";
+const contractId = process.env.NEXT_PUBLIC_ContractId!;
+const analysisId = process.env.NEXT_PUBLIC_AnalysisId!;
 
 export async function fetchContractAnalysis(): Promise<ContractAnalysisResponse> {
   const res = await fetch(`${API_BASE_PATH}/contract/${contractId}/analysis/${analysisId}`, {

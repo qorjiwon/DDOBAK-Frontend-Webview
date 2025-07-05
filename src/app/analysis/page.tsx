@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useRef, useState } from 'react';
 import './styles.scss';
 import { ContractAnalysisDTO } from '@/types/api';
@@ -37,15 +38,8 @@ const ContractAnalysis: React.FC = () => {
                 <div className="bg-[#FCFCFC] rounded-xl py-6 px-6 font-medium">
                     <h3 className="text-base font-bold text-[#616161] mb-2">요약</h3>
                     <p>
-                        이 계약서는 (주)여기어때컴퍼니와 아르바이트 근로자 간의 근로 계약서입니다.
+                        {data?.summary || "계약서 요약을 불러오는 중입니다..."}
                     </p>
-                    <ul className="list-disc list-inside space-y-1 text-[#1A1A1A] leading-[1.4]">
-                        <li>근무지: (주)케이컴퍼니와 아르바이트 근로자 간의 근로 계약</li>
-                        <li>근무 요일: 월~금</li>
-                        <li>근무 유형: 단기 근로</li>
-                        <li>시급: 10,470원</li>
-                        <li>포함 항목: 근무 시간, 휴게 시간, 임금 지급, 휴일 및 휴가 규정 등</li>
-                    </ul>
                 </div>
 
                 {/* Note Box */}
