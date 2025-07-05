@@ -40,7 +40,8 @@ export type ContractAnalysisResponse = ResponseDTO<ContractAnalysisDTO>;
 export interface HtmlBlock {
   category: string; // html 태그
   element: string;  // HTML 개별 요소
-  id: number;       // 태그에 명시된 id 번호
+  id: string;       // 각 요소의 고유 id
+  tagIdx: number; // 태그 내 idx 정보
 }
 
 export interface ContractOcrHtml {

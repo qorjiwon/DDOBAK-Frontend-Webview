@@ -11,6 +11,12 @@ export default function Home() {
         ocr 결과 페이지
       </Link>
       <Link
+        href="/ocrOrigin"
+        className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+      >
+        ocr 원본 페이지
+      </Link>
+      <Link
         href="/analysis"
         className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
       >
