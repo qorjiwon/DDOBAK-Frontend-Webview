@@ -40,8 +40,35 @@ export default function OcrCorrectionPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen text-gray-500">
-        로딩 중...
+      <div className="flex flex-col bg-gray-50 min-h-screen py-[5px]">
+        <div className="flex items-center px-5">
+          <Link href="/">
+            <ChevronLeft size={24} />
+          </Link>
+        </div>
+
+        <h1 className="pl-6 my-9 text-[28px] font-semibold">인식된 텍스트를 확인하세요</h1>
+        <div className="flex-1 px-4 space-y-[10px] mb-4">
+          <div
+            className="ocr-block h-[200px] w-full"
+          >
+          </div>
+        </div>
+      </div>
+    );
+  } else if (blocks.length === 0) {
+    return (
+      <div className="flex flex-col bg-gray-50 min-h-screen py-[5px]">
+        <div className="flex items-center px-5">
+          <Link href="/">
+            <ChevronLeft size={24} />
+          </Link>
+        </div>
+
+        <h1 className="pl-6 my-9 text-[28px] font-semibold">인식된 텍스트를 확인하세요</h1>
+        <div className="w-full flex-1 flex justify-center">
+          <p className="text-gray-500">OCR 결과를 불러올 수 없습니다.</p>
+        </div>
       </div>
     );
   }
@@ -57,7 +84,7 @@ export default function OcrCorrectionPage() {
       <h1 className="pl-6 my-9 text-[28px] font-semibold">인식된 텍스트를 확인하세요</h1>
 
       <div className="flex-1 px-4 space-y-[10px] mb-4">
-        {blocks.map((block, idx) => {
+        { blocks.map((block, idx) => {
           const raw = block.element.trim();
 
           // 1) 테이블 블록 감지
@@ -65,24 +92,24 @@ export default function OcrCorrectionPage() {
             // sanitize 한 뒤, 진짜 table 태그로 렌더
             const clean = DOMPurify.sanitize(raw, { USE_PROFILES: { html: true } });
             return (
-            <div
-              key={block.id}
-              className="ocr-block"
-              style={{
-                '--delay': `${idx * 0.25}s`,
-                '--target-opacity': editingIdx !== null && editingIdx !== idx ? '0.3' : '1'
-              } as React.CSSProperties}
-            >
               <div
                 key={block.id}
-                className="my-6 overflow-x-auto ocr-table"
-                contentEditable
-                // dangerouslySetInnerHTML 로 table 태그 살리기
-                dangerouslySetInnerHTML={{ __html: clean }}
-              />
-            </div>
-          );
-        }
+                className="ocr-block"
+                style={{
+                  '--delay': `${idx * 0.25}s`,
+                  '--target-opacity': editingIdx !== null && editingIdx !== idx ? '0.3' : '1'
+                } as React.CSSProperties}
+              >
+                <div
+                  key={block.id}
+                  className="my-6 overflow-x-auto ocr-table"
+                  contentEditable
+                  // dangerouslySetInnerHTML 로 table 태그 살리기
+                  dangerouslySetInnerHTML={{ __html: clean }}
+                />
+              </div>
+            );
+          }
 
           return (
             <div
@@ -113,9 +140,9 @@ export default function OcrCorrectionPage() {
         })}
       </div>
 
-      <div className="px-4">
+      <div className="px-5 mb-5">
         <button
-          className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium"
+          className="w-full py-4 bg-[#1F79FF] text-white rounded-lg font-medium"
           onClick={() => {
             console.log("Edited OCR Blocks:", blocks);
           }}
