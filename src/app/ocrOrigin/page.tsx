@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { useSearchParams } from 'next/navigation';
-import React, { Suspense, useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import './styles.scss';
 import { fetchContractOcrResult } from '@/api/api';
 import Link from 'next/link';
