@@ -1,18 +1,33 @@
 "use client";
 
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
-import './styles.scss';
-import { ContractAnalysisDTO } from '@/types/api';
-import { Toxic } from '@/types/contract';
-import { ChevronDown } from "lucide-react";
-import { createPortal } from 'react-dom';
-import { fetchContractAnalysis } from '@/api/api';
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect, useRef, useState } from 'react'
+import './styles.scss'
+import { ContractAnalysisDTO } from '@/types/api'
+import { Toxic } from '@/types/contract'
+import { ChevronDown } from 'lucide-react'
+import { createPortal } from 'react-dom'
+import { fetchContractAnalysis } from '@/api/api'
+
+const ClientAnalysis = dynamic(
+  () => Promise.resolve(ContractAnalysis),
+  { ssr: false }
+)
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading…</div>}>
+      <ClientAnalysis />
+    </Suspense>
+  )
+}
 
 const ContractAnalysis: React.FC = () => {
     const searchParams = useSearchParams();
-    const contId = searchParams.get('contId');
-    const analysisId = searchParams.get('analysisId');
+  const contId     = searchParams.get('contId')     ?? ''
+  const analysisId = searchParams.get('analysisId') ?? ''
     const [data, setData] = useState<ContractAnalysisDTO | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -24,7 +39,7 @@ const ContractAnalysis: React.FC = () => {
 
         const loadAnalysis = async () => {
             try {
-                const result = await fetchContractAnalysis(contId || '', analysisId || '');
+                const result = await fetchContractAnalysis(contId, analysisId);
                 setData(result.data);
             } catch (err: unknown) {
                 console.error('API 호출 중 오류 발생:', err);
@@ -297,5 +312,3 @@ const BottomSheet: React.FC<{
         )
     )
 }
-
-export default ContractAnalysis;
