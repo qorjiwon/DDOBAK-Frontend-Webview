@@ -1,7 +1,8 @@
 "use client";
 
+import dynamic from 'next/dynamic'
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import './styles.scss';
 import { fetchContractOcrResult } from '@/api/api';
 import Link from 'next/link';
@@ -9,7 +10,20 @@ import { ChevronLeft } from 'lucide-react';
 import { ContractOcrHtml, HtmlBlock } from '@/types/api';
 import DOMPurify from 'dompurify';
 
-export default function OcrResultPage() {
+const ClientOcr = dynamic(
+  () => Promise.resolve(OcrResultPage),
+  { ssr: false }
+)
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading…</div>}>
+      <ClientOcr />
+    </Suspense>
+  )
+}
+
+const OcrResultPage = () => {
   const searchParams = useSearchParams();
   const contId = searchParams.get('contId');
   const [blocks, setBlocks] = useState<HtmlBlock[]>([]);

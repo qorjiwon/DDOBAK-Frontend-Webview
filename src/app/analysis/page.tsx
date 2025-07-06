@@ -1,9 +1,8 @@
 "use client";
 
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import './styles.scss'
 import { ContractAnalysisDTO } from '@/types/api'
 import { Toxic } from '@/types/contract'
