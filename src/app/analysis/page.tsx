@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import './styles.scss';
 import { ContractAnalysisDTO } from '@/types/api';
@@ -9,22 +10,48 @@ import { createPortal } from 'react-dom';
 import { fetchContractAnalysis } from '@/api/api';
 
 const ContractAnalysis: React.FC = () => {
+    const searchParams = useSearchParams();
+    const contId = searchParams.get('contId');
+    const analysisId = searchParams.get('analysisId');
     const [data, setData] = useState<ContractAnalysisDTO | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
+        if (!contId || !analysisId) {
+            setLoading(false);
+            return;
+        }
+
         const loadAnalysis = async () => {
             try {
-                const result = await fetchContractAnalysis();
+                const result = await fetchContractAnalysis(contId || '', analysisId || '');
                 setData(result.data);
             } catch (err: unknown) {
                 console.error('API 호출 중 오류 발생:', err);
             } finally {
+                setLoading(false);
             }
         };
 
         loadAnalysis();
     }, []);
 
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-screen text-gray-500">
+                로딩 중...
+            </div>
+        );
+    }
+
+    if (!contId || !analysisId) {
+        return (
+            <div className="flex items-center justify-center h-screen text-red-500">
+                잘못된 접근입니다. contId 또는 analysisId가 없습니다.
+            </div>
+        );
+    }
+    
     return (
         <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800">
             <img
@@ -53,7 +80,7 @@ const ContractAnalysis: React.FC = () => {
                         또박이 한마디
                     </div>
                     <p className="mt-1 text-[#1F79FF] font-medium">
-                        { data ? `“${data?.ddobakCommentary.overallComment}”` : "..."}
+                        {data ? `“${data?.ddobakCommentary.overallComment}”` : "..."}
                     </p>
                 </div>
 
@@ -71,7 +98,7 @@ const ContractAnalysis: React.FC = () => {
                 <div className="border-[#FF4949] border bg-[#FFF6F6] rounded-lg p-4 grow basis-0">
                     <h4 className="text-[#FF4949] font-bold">주의 조항 요약</h4>
                     <p className="mt-2 text-[#FF4949] font-medium">
-                        { data ? `“${data?.ddobakCommentary.warningComment}”` : '' }
+                        {data ? `“${data?.ddobakCommentary.warningComment}”` : ''}
                     </p>
                 </div>
 
@@ -88,7 +115,7 @@ const ContractAnalysis: React.FC = () => {
             <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-4 mt-6 mb-14 text-[#1F79FF] space-y-2">
                 <h5 className="font-bold">또박이의 조언</h5>
                 <p className="mt-1 font-medium">
-                    { data ? `“${data?.ddobakCommentary.advice}”` : "..." }
+                    {data ? `“${data?.ddobakCommentary.advice}”` : "..."}
                 </p>
             </div>
 
