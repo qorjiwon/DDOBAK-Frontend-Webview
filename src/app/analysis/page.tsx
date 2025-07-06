@@ -11,22 +11,22 @@ import { createPortal } from 'react-dom'
 import { fetchContractAnalysis } from '@/api/api'
 
 const ClientAnalysis = dynamic(
-  () => Promise.resolve(ContractAnalysis),
-  { ssr: false }
+    () => Promise.resolve(ContractAnalysis),
+    { ssr: false }
 )
 
 export default function Page() {
-  return (
-    <Suspense fallback={<div>Loading…</div>}>
-      <ClientAnalysis />
-    </Suspense>
-  )
+    return (
+        <Suspense fallback={<div>Loading…</div>}>
+            <ClientAnalysis />
+        </Suspense>
+    )
 }
 
 const ContractAnalysis: React.FC = () => {
     const searchParams = useSearchParams();
-  const contId     = searchParams.get('contId')     ?? ''
-  const analysisId = searchParams.get('analysisId') ?? ''
+    const contId = searchParams.get('contId') ?? ''
+    const analysisId = searchParams.get('analysisId') ?? ''
     const [data, setData] = useState<ContractAnalysisDTO | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -65,9 +65,9 @@ const ContractAnalysis: React.FC = () => {
             </div>
         );
     }
-    
+
     return (
-        <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800">
+        <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800 overflow-hidden">
             <img
                 className="w-full"
                 src="/many-found.svg"
@@ -126,18 +126,27 @@ const ContractAnalysis: React.FC = () => {
             </div>
 
             {/* Advice Box */}
-            <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-4 mt-6 mb-14 text-[#1F79FF] space-y-2">
+            <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-4 mt-6 text-[#1F79FF] space-y-2">
                 <h5 className="font-bold">또박이의 조언</h5>
                 <p className="mt-1 font-medium">
                     {data ? `“${data?.ddobakCommentary.advice}”` : "..."}
                 </p>
             </div>
 
-            <img
-                className="w-[162px] h-[84px] mx-1 -mt-12"
-                src="/glasses-ddobak.svg"
-                alt="안경 쓴 또박이"
-            />
+            <div className="flex justify-between items-end h-23 mx-4">
+                <img
+                    className="w-[162px] h-[84px] -mx-2"
+                    src="/glasses-ddobak.svg"
+                    alt="안경 쓴 또박이"
+                />
+                <div className="w-full flex justify-center">
+                    <img
+                        className="mb-1"
+                        src="/speech-bubble.svg"
+                        alt="말풍선"
+                    />
+                </div>
+            </div>
 
             {/* Footer Buttons */}
             <div className="px-5 pb-6 space-y-3 text-[#1F79FF]">
