@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { fetchContractOcrResult } from '@/api/api';
@@ -8,15 +9,22 @@ import { ChevronLeft } from 'lucide-react';
 import { ContractOcrHtml, HtmlBlock } from '@/types/api';
 import DOMPurify from 'dompurify';
 
-export default function OcrCorrectionPage() {
+export default function OcrResultPage() {
+  const searchParams = useSearchParams();
+  const contId = searchParams.get('contId');
   const [blocks, setBlocks] = useState<HtmlBlock[]>([]);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!contId) {
+      setLoading(false);
+      return;
+    }
+
     (async () => {
       try {
-        const res = await fetchContractOcrResult();
+        const res = await fetchContractOcrResult(contId || '');
         const data: ContractOcrHtml = res.data;
         setBlocks(data.htmlArray);
       } catch (err: unknown) {
@@ -67,12 +75,12 @@ export default function OcrCorrectionPage() {
 
         <h1 className="pl-6 my-9 text-[28px] font-semibold">인식된 텍스트를 확인하세요</h1>
         <div className="w-full flex-1 flex justify-center">
-          <p className="text-gray-500">OCR 결과를 불러올 수 없습니다.</p>
+          <p className="text-gray-500">결과를 불러올 수 없습니다.</p>
         </div>
       </div>
     );
   }
-
+  
   return (
     <div className="flex flex-col bg-gray-50 min-h-screen py-[5px]">
       <div className="flex items-center px-5">
