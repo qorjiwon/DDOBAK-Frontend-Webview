@@ -1,10 +1,10 @@
-"use client";
 import Link from 'next/link';
 
 const contractId = process.env.NEXT_PUBLIC_ContractId!;
 const analysisId = process.env.NEXT_PUBLIC_AnalysisId!;
 
 export default function Home() {
+
   return (
     <div className="flex flex-col gap-5 justify-center bg-gray-50 min-h-screen items-center">
       <Link
