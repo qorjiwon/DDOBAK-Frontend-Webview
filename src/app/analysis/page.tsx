@@ -152,7 +152,10 @@ const ContractAnalysis: React.FC = () => {
             <div className="px-5 pb-6 space-y-3 text-[#1F79FF]">
                 <button
                     className="w-full bg-[#1F79FF] px-4 py-4 text-white rounded-lg font-medium"
-                    onClick={() => window.webkit?.messageHandlers.savePdf.postMessage(null)}
+                    onClick={() => window.webkit?.messageHandlers.savePdf.postMessage({
+                        contractId: contId,
+                        analysisId: analysisId,
+                    })}
                 >
                     분석 결과 PDF로 저장
                 </button>

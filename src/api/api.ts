@@ -35,7 +35,6 @@ export async function fetchContractOcrResult(contId: string): Promise<ContractOc
     headers: {
       Authorization: `Bearer ${API_KEY}`,
       'Content-Type': 'application/json',
-      'X-Request-Id': X_REQUEST_ID,
     },
   });
 
