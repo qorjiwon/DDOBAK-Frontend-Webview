@@ -12,10 +12,12 @@
   }
 }
 
-.ocr-table {
+.ocr-table * {
+  font-size: 0.875rem !important;
+
   table {
     border-collapse: collapse;
-    border: 1px solid #D1D5DB; // Tailwind의 gray-300
+    border: 1px solid #D1D5DB;
   }
   th,
   td {
