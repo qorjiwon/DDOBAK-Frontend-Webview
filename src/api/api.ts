@@ -1,7 +1,6 @@
 import type { ContractAnalysisResponse, ContractOcrResponse } from '@/types/api';
 
 const API_BASE_PATH = process.env.NEXT_PUBLIC_API_BASE_URL!;
-const X_REQUEST_ID = process.env.NEXT_PUBLIC_X_REQUEST_ID!;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY!;
 
 
