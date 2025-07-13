@@ -49,12 +49,17 @@ const OcrResultPage = () => {
     })();
   }, []);
 
-
   useEffect(() => {
-    if (showAnalyzing) {
-      window.scrollTo(0, 0);
-    }
-  }, [showAnalyzing]);
+  if (!showAnalyzing) return;
+
+  document.body.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
+
+  return () => {
+    document.body.style.overflow = '';
+  };
+}, [showAnalyzing]);
+
 
   const adjustHeight = (el: HTMLTextAreaElement) => {
     el.style.height = 'auto';
