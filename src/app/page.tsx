@@ -43,6 +43,12 @@ export default function Home() {
       >
         계약서 꿀팁 - 첫 알바 근로계약서라면? 이런 조항을 주의하세요!
       </Link>
+      <Link
+        href={`/test`}
+        className="px-4 py-3 bg-[#1F79FF] text-sm text-white rounded-lg hover:bg-blue-700"
+      >
+        테스트 페이지로 이동
+      </Link>
     </div>
   );
 }
