@@ -102,17 +102,12 @@ const OcrResultPage = () => {
             variants={pageVariants}
             className="flex flex-col py-[5px]"
           >
-            <div className="flex items-center px-5">
-              <Link href="/">
-                <ChevronLeft size={24} />
-              </Link>
-            </div>
 
             <h1 className="pl-6 my-9 text-[28px] font-semibold">인식된 텍스트를 확인하세요</h1>
 
             <div className="flex-1 px-4 space-y-[10px] mb-4">
               {loading ? <div className="ocr-block h-[200px] w-full"></div>
-                : blocks.length === 0 ? <div className="text-center text-gray-500">결과를 불러올 수 없습니다.</div>
+                : blocks.length === 0 ? <div className="text-center text-gray-500">텍스트를 확인할 수 없습니다. 계약서를 더 잘 보이게 촬영해주세요!</div>
                   : <>
                     {blocks.map((block, idx) => {
                       const raw = block.element.trim();
@@ -199,6 +194,7 @@ const OcrResultPage = () => {
               />
             </div>
             <div className="shadow mt-4" />
+            
 
             <button
               className="mt-15 w-full max-w-xs px-6 py-4 bg-[#1F79FF] text-white rounded-lg font-medium"
