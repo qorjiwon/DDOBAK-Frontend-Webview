@@ -51,3 +51,8 @@ export interface ContractOcrHtml {
 }
 
 export type ContractOcrResponse = ResponseDTO<ContractOcrHtml>;
+
+export interface CreateAnalysisRequest {
+  contractId: string;
+  ocrSucceeded: string; // API 스펙에 맞춰 문자열로 전송
+}
