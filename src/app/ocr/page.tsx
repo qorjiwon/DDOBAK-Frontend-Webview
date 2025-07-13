@@ -8,6 +8,7 @@ import { fetchContractOcrResult, createContractAnalysis } from '@/api/api';
 import { ContractOcrHtml, HtmlBlock } from '@/types/api';
 import DOMPurify from 'dompurify';
 import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedDdobak from '@/components/DdobakAnalyzer/AnimatedDdobak';
 
 const ClientOcr = dynamic(
   () => Promise.resolve(OcrResultPage),
@@ -187,17 +188,9 @@ const OcrResultPage = () => {
             variants={analyzingVariants}
             className="fixed inset-0 bg-[#FCFCFC] z-20 flex flex-col items-center justify-center"
           >
+            <AnimatedDdobak />
             <h1 className="text-[28px] text-[#1A1A1A] font-semibold mb-2">분석을 시작했어요!</h1>
             <p className="text-sm font-medium text-[#1A1A1A] mb-21">또박이가 분석 중이에요. 금방 결과 알려드릴게요.</p>
-            <div className="floating-container w-full flex justify-center">
-              <img
-                className="logo w-[190px]"
-                src="/ddobak.svg"
-                alt="DDOBAK Logo"
-              />
-            </div>
-            <div className="shadow mt-4" />
-
 
             <button
               className="mt-15 w-full max-w-xs px-6 py-4 bg-[#1F79FF] text-white rounded-lg font-medium"
