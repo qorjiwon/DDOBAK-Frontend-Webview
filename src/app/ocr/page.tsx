@@ -10,7 +10,6 @@ import { ChevronLeft } from 'lucide-react';
 import { ContractOcrHtml, HtmlBlock } from '@/types/api';
 import DOMPurify from 'dompurify';
 import { motion, AnimatePresence } from 'framer-motion';
-import { start } from 'repl';
 
 const ClientOcr = dynamic(
   () => Promise.resolve(OcrResultPage),
