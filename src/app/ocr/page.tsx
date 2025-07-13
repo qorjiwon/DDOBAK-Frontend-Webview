@@ -89,7 +89,7 @@ const OcrResultPage = () => {
 
   return (
 
-    <div className="relative w-full min-h-screen bg-[#FCFCFC]">
+    <div className="relative w-full min-h-screen">
       <AnimatePresence mode="sync">
         {!showAnalyzing ? (
           <motion.div
@@ -98,7 +98,7 @@ const OcrResultPage = () => {
             animate="initial"
             exit="exit"
             variants={pageVariants}
-            className="flex flex-col py-[5px]"
+            className="flex flex-col pt-[5px]"
           >
 
             <h1 className="pl-6 my-9 text-[28px] font-semibold">인식된 텍스트를 확인하세요</h1>
@@ -163,12 +163,19 @@ const OcrResultPage = () => {
 
                     <div className="px-5 mb-5">
                       <button
-                        className="w-full py-4 bg-[#1F79FF] text-white rounded-lg font-medium"
+                        className="w-full py-4 bg-[#1F79FF] text-[#FCFCFC] rounded-lg font-medium"
                         onClick={() => startAnalysis(true)}
                       >
                         분석 시작하기
                       </button>
                     </div>
+
+                    <button
+                      className="w-full px-3 py-3 bg-[#1F79FF] text-sm text-white rounded-lg font-medium"
+                      onClick={() => window.webkit?.messageHandlers.goHome.postMessage(null)}
+                    >
+                      홈으로 돌아가기
+                    </button>
                   </>
               }
             </div>
@@ -180,7 +187,7 @@ const OcrResultPage = () => {
             animate="animate"
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
             variants={analyzingVariants}
-            className="fixed inset-0 bg-white z-20 flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-[#FCFCFC] z-20 flex flex-col items-center justify-center"
           >
             <h1 className="text-[28px] text-[#1A1A1A] font-semibold mb-2">분석을 시작했어요!</h1>
             <p className="text-sm font-medium text-[#1A1A1A] mb-21">또박이가 분석 중이에요. 금방 결과 알려드릴게요.</p>
@@ -192,7 +199,7 @@ const OcrResultPage = () => {
               />
             </div>
             <div className="shadow mt-4" />
-            
+
 
             <button
               className="mt-15 w-full max-w-xs px-6 py-4 bg-[#1F79FF] text-white rounded-lg font-medium"
