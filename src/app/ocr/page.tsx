@@ -5,8 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import React, { Suspense, useEffect, useState } from 'react';
 import './styles.scss';
 import { fetchContractOcrResult, createContractAnalysis } from '@/api/api';
-import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
 import { ContractOcrHtml, HtmlBlock } from '@/types/api';
 import DOMPurify from 'dompurify';
 import { motion, AnimatePresence } from 'framer-motion';
