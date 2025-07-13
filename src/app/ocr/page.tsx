@@ -154,7 +154,7 @@ const OcrResultPage = () => {
                             onBlur={() => setEditingIdx(null)}
                             onInput={(e) => adjustHeight(e.currentTarget)}
                             ref={(el) => { if (el) adjustHeight(el); }}
-                            className="w-full  bg-[#F8F8F8] rounded-lg p-3 text-sm font-medium text-gray-800 focus:outline-none overflow-hidden"
+                            className="w-full bg-[#F8F8F8] rounded-lg p-3 text-sm font-medium text-[#1A1A1A] focus:outline-none overflow-hidden"
                             style={{ resize: 'none' }}
                           />
                         </div>
