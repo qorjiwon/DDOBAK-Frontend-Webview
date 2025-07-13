@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+
+  images: {
+    domains: [
+      'm.radio.ytn.co.kr',
+      'www.jipyong.com',
+    ],
+  },
 };
 
 export default nextConfig;
