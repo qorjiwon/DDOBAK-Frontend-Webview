@@ -1,11 +1,10 @@
 .container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    padding: 22px;
     line-height: 1.6;
     max-width: 800px;
     margin: 0 auto 20px;
     line-height: 1.5;
-    color: #32302C;
+    color: #1A1A1A;
 
     .heading {
         font-size: 1.6rem;
@@ -38,7 +37,7 @@
     }
 
     .description {
-        background-color: #f9f9f9;
+        background-color: #F8F8F8;
         border-left: 4px solid #ccc;
         padding: 10px 15px;
         margin: 1rem 0;
@@ -149,9 +148,9 @@
     }
 
     table {
-        width: 100%;
+        width: calc(100% + 14px);
         border-collapse: collapse;
-        margin: 1rem 0;
+        margin: 1rem -7px;
 
         th {
             border: 1px solid #ddd;
