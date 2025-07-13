@@ -4,12 +4,13 @@ import dynamic from 'next/dynamic'
 import { useSearchParams } from 'next/navigation';
 import React, { Suspense, useEffect, useState } from 'react';
 import './styles.scss';
-import { fetchContractOcrResult } from '@/api/api';
+import { fetchContractOcrResult, createContractAnalysis } from '@/api/api';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { ContractOcrHtml, HtmlBlock } from '@/types/api';
 import DOMPurify from 'dompurify';
 import { motion, AnimatePresence } from 'framer-motion';
+import { start } from 'repl';
 
 const ClientOcr = dynamic(
   () => Promise.resolve(OcrResultPage),
@@ -77,6 +78,17 @@ const OcrResultPage = () => {
     initial: { x: '100%', opacity: 0 },
     animate: { x: 0, opacity: 1, transition: { delay: 0.3, duration: 0.2 } },
   };
+
+  const startAnalysis = async (ocrSucceeded: boolean) => {
+    setShowAnalyzing(true);
+    try {
+      await createContractAnalysis(contId || '', ocrSucceeded);
+      window.webkit?.messageHandlers.startAnalysis.postMessage(null);
+    } catch (err: unknown) {
+      console.error(err);
+      alert('분석 시작 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
+  }
 
   return (
 
@@ -160,7 +172,7 @@ const OcrResultPage = () => {
                     <div className="px-5 mb-5">
                       <button
                         className="w-full py-4 bg-[#1F79FF] text-white rounded-lg font-medium"
-                        onClick={() => setShowAnalyzing(true)}
+                        onClick={() => startAnalysis(true)}
                       >
                         분석 시작하기
                       </button>
