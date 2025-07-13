@@ -21,12 +21,12 @@ const PDFContractClauses: React.FC = () => (
       <h4>판례 사례</h4>
       <ul className="list">
         <li>
-          미용실 디자이너가 퇴사 후 인근(5 km 이내) 개업하면 2천만 원 배상하도록 한 약정으로 소송됨. 법원은 “5 km 범위는 과도하다”고 지적
+          미용실 디자이너가 퇴사 후 인근(5 km 이내) 개업하면 2천만 원 배상하도록 한 약정으로 소송됨. 법원은 &quot;5 km 범위는 과도하다&quot;고 지적
           <ul className="list">
             <li>
               <a href="https://m.radio.ytn.co.kr/interview_view.php?id=77172&s_mcd=0440&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">
                   <Image src="https://m.radio.ytn.co.kr/favicon.ico" alt="" width={16} height={16} />
-                  "근무했던 미용실에서 손해배상 소송, 알고보니 계약서에 독소조항?"
+                  &quot;근무했던 미용실에서 손해배상 소송, 알고보니 계약서에 독소조항?&quot;
               </a>
             </li>
           </ul>
@@ -52,7 +52,7 @@ const PDFContractClauses: React.FC = () => (
       <h4>구분</h4>
       <ul className="list">
         <li>
-          <strong>손해배상 예정액(위약금)</strong>: 계약 위반 시 자동 징수. 민법상 “부당 과다할 경우 법원이 감액 가능”
+          <strong>손해배상 예정액(위약금)</strong>: 계약 위반 시 자동 징수. 민법상 &quot;부당 과다할 경우 법원이 감액 가능&quot;
           <ul className="list">
             <li>
               <a href="https://www.jipyong.com/kr/board/news_view.php?nownum=843&page=94&seq=7322&type=&value=&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">

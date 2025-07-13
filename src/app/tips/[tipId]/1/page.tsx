@@ -27,7 +27,7 @@ const ContractClauses: React.FC = () => (
       <br />
       <h3>📝 계약서 작성 시 유의점</h3>
       <ul className="list">
-        <li>"월급 300만 원 (기본급 250만 + 연장/야간/휴일 수당 포함)" 등 <strong>명확한 구조 기재 필요</strong></li>
+        <li>&quot;월급 300만 원 (기본급 250만 + 연장/야간/휴일 수당 포함)&quot; 등 <strong>명확한 구조 기재 필요</strong></li>
         <li>포함된 수당 요소, 계산 기준, 시간 외 포함범위 등을 자세히 기술해야 해요.</li>
       </ul>
       <br />
@@ -56,7 +56,7 @@ const ContractClauses: React.FC = () => (
       <h3>📩 해고 규정</h3>
       <ul className="list">
         <li>수습 근로자(3개월 미만)는 30일 예고 없이 즉시 해고 가능.</li>
-        <li>다만 “합리적 이유 + 서면 통보 + 객관적 증거”가 필요하며, 절차를 지키지 않으면 <strong>부당해고</strong> 여지가 있어요.</li>
+        <li>다만 &quot;합리적 이유 + 서면 통보 + 객관적 증거&quot;가 필요하며, 절차를 지키지 않으면 <strong>부당해고</strong> 여지가 있어요.</li>
       </ul>
     </section>
     <div
@@ -92,7 +92,7 @@ const ContractClauses: React.FC = () => (
           </tr>
         </tbody>
       </table>
-      <p> `해약금`과 `위약금`은 법적 성격에서 구분해요. 해약금은 계약 해제 용도, 위약금은 계약 위반 보전 목적이에요. <a
+      <p> <mark className="highlight">해약금</mark>과 <mark className="highlight">위약금</mark>은 법적 성격에서 구분해요. 해약금은 계약 해제 용도, 위약금은 계약 위반 보전 목적이에요. <a
         href="https://www.hankyung.com/article/202206078042Q?utm_source=chatgpt.com"
         className="link-mention"
         target="_blank"
@@ -136,7 +136,7 @@ const ContractClauses: React.FC = () => (
           </tr>
           <tr>
             <td className="td">주의</td>
-            <td className="td">도급계약서를 주면서 ‘직원처럼 일해달라’는 경우 불법일 수 있음</td>
+            <td className="td">도급계약서를 주면서 &apos;직원처럼 일해달라&apos;는 경우 불법일 수 있음</td>
             <td className="td"></td>
           </tr>
         </tbody>
@@ -167,13 +167,13 @@ const ContractClauses: React.FC = () => (
           </tr>
           <tr>
             <td className="td"><strong>효과</strong></td>
-            <td className="td">기 발생된 권리·의무 유지, '앞으로만' 효력 상실</td>
+            <td className="td">기 발생된 권리·의무 유지, &apos;앞으로만&apos; 효력 상실</td>
             <td className="td">계약 전 처음부터 없던 것처럼 처리됨</td>
           </tr>
           <tr>
             <td className="td"><strong>예시</strong></td>
-            <td className="td">“계약 1개월 전 해지 통보 필요”</td>
-            <td className="td">“체결 후 7일 내 일방 해제 가능”</td>
+            <td className="td">&quot;계약 1개월 전 해지 통보 필요&quot;</td>
+            <td className="td">&quot;체결 후 7일 내 일방 해제 가능&quot;</td>
           </tr>
         </tbody>
       </table>
