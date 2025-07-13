@@ -80,11 +80,11 @@
 
         ul {
             margin-left: 10px;
-            
+
             li {
                 margin-bottom: 0.5rem;
                 line-height: 1.4;
-    
+
                 &::before {
                     content: '•';
                     font-size: 1.2rem;
@@ -92,13 +92,13 @@
                     display: inline-block;
                     width: 1rem;
                 }
-    
+
                 ul {
                     margin-top: 3px;
-    
+
                     li {
                         display: flex;
-    
+
                         a {
                             padding: 2px 8px;
                             display: block;
@@ -106,26 +106,26 @@
                             color: inherit;
                             font-weight: bold;
                             line-height: 1.5;
-    
+
                             img {
                                 display: inline-block;
                                 width: 1.2rem;
                                 height: 1.2rem;
                                 margin-right: 4.8px;
                             }
-    
+
                             &.active,
                             &:hover {
                                 background-color: rgba(50, 48, 44, 0.1);
                                 border-radius: 4px;
                             }
-    
+
                             span {
                                 color: rgba(115, 114, 110, 1);
                                 font-weight: 500;
                             }
                         }
-    
+
                         &::before {
                             content: '○'; // 빈 동그라미
                             font-size: 0.9rem;
@@ -156,7 +156,7 @@
         th {
             border: 1px solid #ddd;
             padding: 8px;
-            background-color: #f2f2f2;
+            background-color: #F4F8FF;
             text-align: left;
         }
 
@@ -199,5 +199,13 @@
         border-bottom: 1px solid rgba(84, 72, 49, 0.15);
     }
 
+    mark.highlight {
+        background-color: #F4F8FF;
+        color: #1F79FF;
+        padding: 0.2em 0.3em;
+        border-radius: 0.2em;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
 
 }
