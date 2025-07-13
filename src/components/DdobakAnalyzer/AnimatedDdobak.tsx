@@ -1,33 +1,6 @@
-'use client';
-import React, { useEffect, useRef } from 'react';
 import styles from './AnimatedDdobak.module.scss';
 
 export default function AnimatedDdobak() {
-  const laserRef = useRef<SVGLineElement>(null);
-  const leftEyeRef = useRef<SVGCircleElement>(null);
-  const rightEyeRef = useRef<SVGCircleElement>(null);
-
-  useEffect(() => {
-    let frame: number;
-    const animateLaser = () => {
-      const laser = laserRef.current;
-      const l = leftEyeRef.current;
-      const r = rightEyeRef.current;
-      if (laser && l && r) {
-        const lx = l.cx.baseVal.value;
-        const ly = l.cy.baseVal.value;
-        const rx = r.cx.baseVal.value;
-        const ry = r.cy.baseVal.value;
-        const t = (Math.sin(Date.now() / 500) + 1) / 2;
-        laser.setAttribute('x2', String(lx + (rx - lx) * t));
-        laser.setAttribute('y2', String(ly + (ry - ly) * t));
-      }
-      frame = requestAnimationFrame(animateLaser);
-    };
-    frame = requestAnimationFrame(animateLaser);
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
   return (
     <div>
       <svg width="393" height="369" viewBox="0 0 393 369" fill="none" xmlns="http://www.w3.org/2000/svg">
