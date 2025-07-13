@@ -1,5 +1,5 @@
-import { blockquote } from 'framer-motion/client';
 import React from 'react';
+import Image from 'next/image';
 
 const PDFContractClauses: React.FC = () => (
   <div className="container">
@@ -25,7 +25,7 @@ const PDFContractClauses: React.FC = () => (
           <ul className="list">
             <li>
               <a href="https://m.radio.ytn.co.kr/interview_view.php?id=77172&s_mcd=0440&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">
-                  <img src="https://m.radio.ytn.co.kr/favicon.ico" alt="" />
+                  <Image src="https://m.radio.ytn.co.kr/favicon.ico" alt="" width={16} height={16} />
                   "근무했던 미용실에서 손해배상 소송, 알고보니 계약서에 독소조항?"
               </a>
             </li>
@@ -56,7 +56,7 @@ const PDFContractClauses: React.FC = () => (
           <ul className="list">
             <li>
               <a href="https://www.jipyong.com/kr/board/news_view.php?nownum=843&page=94&seq=7322&type=&value=&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">
-                <img src="https://www.jipyong.com/kr/resource/images/favi.ico" alt="" />
+                <Image src="https://www.jipyong.com/kr/resource/images/favi.ico" alt="" width={16} height={16} />
                 <span>법무법인[유] 지평</span> 노동칼럼 경업금지 약정의 효력
               </a>
             </li>
