@@ -10,3 +10,18 @@
 .animate-slide-up {
   animation: slide-up 0.3s ease-out forwards;
 }
+
+@keyframes floatVertical {
+  0%,
+  100% {
+    transform: translateY(-1px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.speech-bubble-float {
+  animation: floatVertical 2.5s ease-in-out infinite;
+}
