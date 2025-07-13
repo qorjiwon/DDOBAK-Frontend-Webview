@@ -1,0 +1,13 @@
+.ocr-table {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #D1D5DB; // Tailwind의 gray-300
+  }
+
+  th,
+  td {
+    border: 1px solid #D1D5DB;
+    padding: 0.5rem;
+  }
+}

@@ -18,6 +18,9 @@ export interface ResponseDTO<T> {
 export interface ContractAnalysisDTO {
   originContent: string;       // 계약서 OCR 전문 텍스트
   summary: string;             // 계약서 대표 요약문
+  analysisStatus: string;      // 분석 상태
+  analysisDate: string;       // 분석 날짜
+  toxicCount: number;          // 독소 조항 개수
   ddobakCommentary: {
     overallComment: string;    // 또박이 한마디
     warningComment: string;    // 주의 사항 요약
@@ -32,8 +35,24 @@ export interface ContractAnalysisDTO {
   }>;
 }
 
-/**  
- * 실제 호출할 때 받을 타입  
- */
-export type ContractAnalysisResponse =
-  ResponseDTO<ContractAnalysisDTO>;
+export type ContractAnalysisResponse = ResponseDTO<ContractAnalysisDTO>;
+
+export interface HtmlBlock {
+  category: string; // html 태그
+  element: string;  // HTML 개별 요소
+  id: string;       // 각 요소의 고유 id
+  tagIdx: number; // 태그 내 idx 정보
+}
+
+export interface ContractOcrHtml {
+  pageIdx: number;
+  htmlEntire: string;
+  htmlArray: HtmlBlock[];
+}
+
+export type ContractOcrResponse = ResponseDTO<ContractOcrHtml>;
+
+export interface CreateAnalysisRequest {
+  contractId: string;
+  ocrSucceeded: string; // API 스펙에 맞춰 문자열로 전송
+}

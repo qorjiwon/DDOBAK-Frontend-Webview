@@ -1,0 +1,71 @@
+.ocr-block {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.5s forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: var(--target-opacity, 1);
+    transform: translateY(0);
+  }
+}
+
+.ocr-table * {
+  font-size: 0.875rem !important;
+
+  table {
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    border: 1px solid #FFFFFF;
+    padding: 0.5rem;
+    color: #1A1A1A;
+  }
+}
+
+@keyframes floatVertical {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes shadowScale {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+}
+
+.floating-container {
+  animation: floatVertical 3s ease-in-out infinite;
+}
+
+.shadow {
+  width: 150px;
+  height: 20px;
+  background: radial-gradient(ellipse at center,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0) 70%);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  filter: blur(4px);
+  animation: shadowScale 3s ease-in-out infinite;
+  pointer-events: none;
+}
