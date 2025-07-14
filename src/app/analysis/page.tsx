@@ -13,6 +13,7 @@ import { RevealOnScroll } from '@/components/RevealOnScroll'
 import MiniDdoBak from '@/components/mini-ddobak';
 import GlassesDdobak from '@/components/glasses-ddobak';
 import SpeechBubble from '@/components/speech-bubble'
+import ManyFound from '@/components/many-found';
 
 const ClientAnalysis = dynamic(
     () => Promise.resolve(ContractAnalysis),
@@ -72,11 +73,7 @@ const ContractAnalysis: React.FC = () => {
 
     return (
         <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800 overflow-hidden">
-            <img
-                className="w-full"
-                src="/many-found.svg"
-                alt="또박이"
-            />
+            <ManyFound />
             {/* Header */}
             <div className="pt-9 text-center">
                 <p className="text-[#9E9E9E] font-bold">이 계약서에서 발견된 독소조항은</p>
