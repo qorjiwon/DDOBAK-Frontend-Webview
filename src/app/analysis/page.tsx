@@ -13,7 +13,9 @@ import { RevealOnScroll } from '@/components/RevealOnScroll'
 import MiniDdoBak from '@/components/mini-ddobak';
 import GlassesDdobak from '@/components/glasses-ddobak';
 import SpeechBubble from '@/components/speech-bubble'
-import ManyFound from '@/components/many-found';
+import MoreThanTwoFound from '@/components/more-than-two-found';
+import TwoFound from '@/components/two-found';
+import OneFound from '@/components/one-found';
 
 const ClientAnalysis = dynamic(
     () => Promise.resolve(ContractAnalysis),
@@ -73,7 +75,13 @@ const ContractAnalysis: React.FC = () => {
 
     return (
         <div className="font-sans text-sm text-gray-800 overflow-hidden">
-            <ManyFound />
+            {data?.toxics && data.toxics.length > 2
+                ? <MoreThanTwoFound />
+                : data?.toxics.length == 2
+                    ? <TwoFound />
+                    : <OneFound />
+            }
+
             {/* Header */}
             <div className="pt-9 text-center">
                 <p className="text-[#9E9E9E] font-bold">이 계약서에서 발견된 독소조항은</p>
@@ -146,7 +154,7 @@ const ContractAnalysis: React.FC = () => {
             <div className="flex justify-between items-end h-23 mx-4">
                 <GlassesDdobak />
                 <div className="w-full h-auto flex justify-center">
-                    <SpeechBubble/>
+                    <SpeechBubble />
                 </div>
             </div>
 
