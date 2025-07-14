@@ -72,7 +72,7 @@ const ContractAnalysis: React.FC = () => {
     }
 
     return (
-        <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800 overflow-hidden">
+        <div className="font-sans text-sm text-gray-800 overflow-hidden">
             <ManyFound />
             {/* Header */}
             <div className="pt-9 text-center">
@@ -83,7 +83,7 @@ const ContractAnalysis: React.FC = () => {
             <div className="mt-9 mx-5 space-y-[39px]">
                 {/* Summary Card */}
                 <RevealOnScroll>
-                    <div className="bg-[#FCFCFC] rounded-xl py-6 px-6 font-medium">
+                    <div className="bg-[#FCFCFC] border border-[#E4E4E4] rounded-xl py-6 px-6 font-medium">
                         <h3 className="text-base font-bold text-[#616161] mb-2">요약</h3>
                         <p>
                             {data?.summary || "분석 결과를 불러오지 못했습니다."}
@@ -135,7 +135,7 @@ const ContractAnalysis: React.FC = () => {
 
             {/* Advice Box */}
             <RevealOnScroll>
-                <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-4 mt-6 text-[#1F79FF] space-y-2">
+                <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-5 mt-6 text-[#1F79FF] space-y-2">
                     <h5 className="font-bold">또박이의 조언</h5>
                     <p className="mt-1 font-medium">
                         {data ? `“${data?.ddobakCommentary.advice}”` : "..."}
@@ -206,7 +206,7 @@ const ToxicCard: React.FC<{ idx: number; item: Toxic }> = ({ idx, item }) => {
     }, [selected]);
 
     return (
-        <div className="bg-white rounded-xl p-6 font-medium space-y-3">
+        <div className="bg-white rounded-xl px-[17px] py-[18px] font-medium space-y-3">
             <h4 className="text-[#616161] text-base space-x-3">
                 <span className='font-bold'>
                     주의 조항 {String.fromCharCode(9312 + idx)}
