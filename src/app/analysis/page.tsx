@@ -105,7 +105,7 @@ const ContractAnalysis: React.FC = () => {
 
                 <RevealOnScroll>
                     <img
-                        className="w-[162px] mx-[50vw] -mt-12"
+                        className="w-[162px] mx-[50vw] h-auto -mt-12"
                         src="/mini-ddobak.svg"
                         alt="안경 쓴 또박이"
                     />
@@ -149,11 +149,11 @@ const ContractAnalysis: React.FC = () => {
 
             <div className="flex justify-between items-end h-23 mx-4">
                 <img
-                    className="w-[162px] h-[84px] -mx-2"
+                    className="w-full h-auto -mx-2"
                     src="/glasses-ddobak.svg"
                     alt="안경 쓴 또박이"
                 />
-                <div className="w-full flex justify-center">
+                <div className="w-full h-auto flex justify-center">
                     <img
                         className="speech-bubble-float"
                         src="/speech-bubble.svg"
