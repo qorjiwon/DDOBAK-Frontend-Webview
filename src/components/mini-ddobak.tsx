@@ -1,6 +1,6 @@
 export default function MiniDdoBak() {
     return (
-        <div className="w-full h-auto flex justify-center">
+        <div className="w-[162px] mx-[50vw] h-auto -mt-12">
             <svg width="167" height="92" viewBox="0 0 167 92" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d_697_3853)">
                     <path d="M36.9828 39.8197L51.2168 67.5797C51.5188 68.1686 50.9853 68.8314 50.3527 68.6367C39.2579 65.2208 17.6609 55.7337 8.17842 41.0813C-1.74206 25.7519 22.8449 33.559 36.6127 39.4714C36.7745 39.5409 36.9025 39.663 36.9828 39.8197Z" fill="#C1D8FC" />

@@ -70,7 +70,11 @@ const ContractAnalysis: React.FC = () => {
 
     return (
         <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800 overflow-hidden">
-            <MiniDdoBak />
+            <img
+                className="w-full"
+                src="/many-found.svg"
+                alt="또박이"
+            />
             {/* Header */}
             <div className="pt-9 text-center">
                 <p className="text-[#9E9E9E] font-bold">이 계약서에서 발견된 독소조항은</p>
@@ -85,7 +89,7 @@ const ContractAnalysis: React.FC = () => {
                         <p>
                             {data?.summary || "분석 결과를 불러오지 못했습니다."}
                         </p>
-                </div>
+                    </div>
                 </RevealOnScroll>
 
                 {/* Note Box */}
@@ -95,17 +99,13 @@ const ContractAnalysis: React.FC = () => {
                             또박이 한마디
                         </div>
                         <p className="mt-1 text-[#1F79FF] font-medium">
-                        {data ? `“${data?.ddobakCommentary.overallComment}”` : "..."}
-                    </p>
-                </div>
-                </RevealOnScroll>   
+                            {data ? `“${data?.ddobakCommentary.overallComment}”` : "..."}
+                        </p>
+                    </div>
+                </RevealOnScroll>
 
                 <RevealOnScroll>
-                    <img
-                        className="w-[162px] mx-[50vw] h-auto -mt-12"
-                        src="/mini-ddobak.svg"
-                        alt="안경 쓴 또박이"
-                    />
+                    <MiniDdoBak />
                 </RevealOnScroll>
             </div>
 
@@ -113,14 +113,14 @@ const ContractAnalysis: React.FC = () => {
             <div className="bg-[#616161] px-5 py-[28px] space-y-2">
 
                 {/* Warning Summary */}
-                
+
                 <RevealOnScroll>
-                <div className="border-[#FF4949] border bg-[#FFF6F6] rounded-lg p-4 grow basis-0">
-                    <h4 className="text-[#FF4949] font-bold">주의 조항 요약</h4>
-                    <p className="mt-2 text-[#FF4949] font-medium">
-                        {data ? `“${data?.ddobakCommentary.warningComment}”` : ''}
-                    </p>
-                </div>
+                    <div className="border-[#FF4949] border bg-[#FFF6F6] rounded-lg p-4 grow basis-0">
+                        <h4 className="text-[#FF4949] font-bold">주의 조항 요약</h4>
+                        <p className="mt-2 text-[#FF4949] font-medium">
+                            {data ? `“${data?.ddobakCommentary.warningComment}”` : ''}
+                        </p>
+                    </div>
                 </RevealOnScroll>
 
 
