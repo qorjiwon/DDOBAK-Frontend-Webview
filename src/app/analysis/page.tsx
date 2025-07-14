@@ -11,6 +11,8 @@ import { createPortal } from 'react-dom'
 import { fetchContractAnalysis } from '@/api/api'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
 import MiniDdoBak from '@/components/mini-ddobak';
+import GlassesDdobak from '@/components/glasses-ddobak';
+import SpeechBubble from '@/components/speech-bubble'
 
 const ClientAnalysis = dynamic(
     () => Promise.resolve(ContractAnalysis),
@@ -145,17 +147,9 @@ const ContractAnalysis: React.FC = () => {
             </RevealOnScroll>
 
             <div className="flex justify-between items-end h-23 mx-4">
-                <img
-                    className="w-full h-auto -mx-2"
-                    src="/glasses-ddobak.svg"
-                    alt="안경 쓴 또박이"
-                />
+                <GlassesDdobak />
                 <div className="w-full h-auto flex justify-center">
-                    <img
-                        className="speech-bubble-float"
-                        src="/speech-bubble.svg"
-                        alt="말풍선"
-                    />
+                    <SpeechBubble/>
                 </div>
             </div>
 
