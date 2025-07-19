@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useSearchParams } from 'next/navigation';
 import React, { Suspense, useEffect, useState } from 'react';
 import './styles.scss';
-import { fetchContractOcrResult, createContractAnalysis } from '@/api/api';
+import { fetchContractOcrResult, createContractAnalysis, updateContractOcr } from '@/api/api';
 import { ContractOcrHtml, HtmlBlock } from '@/types/api';
 import DOMPurify from 'dompurify';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -30,7 +30,7 @@ const OcrResultPage = () => {
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [showAnalyzing, setShowAnalyzing] = useState(false);
-  const [textareaValues, setTextareaValues] = useState<{[key: string]: string}>({});
+  const [textareaValues, setTextareaValues] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     if (!contId) {
@@ -43,9 +43,9 @@ const OcrResultPage = () => {
         const res = await fetchContractOcrResult(contId || '');
         const data: ContractOcrHtml = res.data;
         setBlocks(data.htmlArray);
-        
+
         // textarea 초기값 설정
-        const initialValues: {[key: string]: string} = {};
+        const initialValues: { [key: string]: string } = {};
         data.htmlArray.forEach(block => {
           if (!block.element.toLowerCase().startsWith("<table")) {
             initialValues[block.id] = stripHtml(block.element);
@@ -80,15 +80,15 @@ const OcrResultPage = () => {
   }, []);
 
   useEffect(() => {
-  if (!showAnalyzing) return;
+    if (!showAnalyzing) return;
 
-  document.body.style.overflow = 'hidden';
-  window.scrollTo(0, 0);
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
 
-  return () => {
-    document.body.style.overflow = '';
-  };
-}, [showAnalyzing]);
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showAnalyzing]);
 
 
   const adjustHeight = (el: HTMLTextAreaElement) => {
@@ -102,14 +102,16 @@ const OcrResultPage = () => {
       .replace(/<[^>]+>/g, "")
       .trim();
 
-  const restoreLineBreaks = (text: string) =>
-    text.replace(/\n/g, '<br>');
-
-  const handleTableBlur = (idx: number, element: HTMLDivElement | null) => {
+  const handleTableBlur = async (idx: number, element: HTMLDivElement | null) => {
     if (!element) return;
     const updated = [...blocks];
     updated[idx] = { ...updated[idx], element: element.innerHTML || '' };
     setBlocks(updated);
+    try {
+      await updateContractOcr(contId || '', updated[idx].id, element.innerHTML || '');
+    } catch (err) {
+      console.error('테이블 블록 업데이트 실패:', err);
+    }
   };
 
   const pageVariants = {
@@ -132,6 +134,18 @@ const OcrResultPage = () => {
     }
   }
 
+  const replaceInnerTextKeepWrapper = (originalHtml: string, newText: string) => {
+    const match = originalHtml.match(/^<(\w+)([^>]*)>([\s\S]*)<\/\1>$/);
+    const innerHtml = newText.replace(/\n/g, "<br>");
+    if (match) {
+      const tagName = match[1];
+      const attrs = match[2];
+      return `<${tagName}${attrs}>${innerHtml}</${tagName}>`;
+    }
+    // 태그 없으면 그냥 개행만 br 로
+    return innerHtml;
+  };
+
   return (
 
     <div className="relative w-full min-h-screen">
@@ -153,7 +167,8 @@ const OcrResultPage = () => {
                 : blocks.length === 0 ? <div className="text-center text-gray-500">텍스트를 확인할 수 없습니다. 계약서를 더 잘 보이게 촬영해주세요!</div>
                   : <>
                     {blocks.map((block, idx) => {
-                      const raw = block.element.trim();
+                      const raw = block.element;  // 전체 HTML
+                      const textValue = textareaValues[block.id] ?? stripHtml(raw);
 
                       if (raw.toLowerCase().startsWith("<table")) {
                         const clean = DOMPurify.sanitize(raw, { USE_PROFILES: { html: true } });
@@ -191,25 +206,29 @@ const OcrResultPage = () => {
                           } as React.CSSProperties}
                         >
                           <textarea
-                            value={textareaValues[block.id] || ''}
+                            value={textValue}
                             onChange={(e) => {
-                              const newValue = e.target.value;
-                              setTextareaValues(prev => ({
-                                ...prev,
-                                [block.id]: newValue
-                              }));
-                              
+                              const newPlain = e.target.value;
+                              setTextareaValues(v => ({ ...v, [block.id]: newPlain }));
+
                               const updated = [...blocks];
-                              updated[idx] = { ...updated[idx], element: restoreLineBreaks(newValue) };
+                              updated[idx] = { ...updated[idx], element: replaceInnerTextKeepWrapper(raw, newPlain) };
                               setBlocks(updated);
                               adjustHeight(e.target);
                             }}
                             onFocus={() => setEditingIdx(idx)}
-                            onBlur={() => setEditingIdx(null)}
+                            onBlur={async () => {
+                              setEditingIdx(null);
+                              try {
+                                await updateContractOcr(contId || '', blocks[idx].id, blocks[idx].element);
+                              } catch (err) {
+                                console.error('테이블 블록 업데이트 실패:', err);
+                              }
+                            }}
                             onInput={(e) => adjustHeight(e.currentTarget)}
                             ref={(el) => { if (el) adjustHeight(el); }}
                             className="w-full bg-[#F8F8F8] rounded-lg p-3 text-sm font-medium text-[#1A1A1A] focus:outline-none overflow-hidden"
-                            style={{ 
+                            style={{
                               resize: 'none',
                               whiteSpace: 'pre-wrap'
                             }}
