@@ -30,6 +30,35 @@ const OcrResultPage = () => {
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [showAnalyzing, setShowAnalyzing] = useState(false);
+  const [textareaValues, setTextareaValues] = useState<{[key: string]: string}>({});
+
+  useEffect(() => {
+    if (!contId) {
+      setLoading(false);
+      return;
+    }
+
+    (async () => {
+      try {
+        const res = await fetchContractOcrResult(contId || '');
+        const data: ContractOcrHtml = res.data;
+        setBlocks(data.htmlArray);
+        
+        // textarea 초기값 설정
+        const initialValues: {[key: string]: string} = {};
+        data.htmlArray.forEach(block => {
+          if (!block.element.toLowerCase().startsWith("<table")) {
+            initialValues[block.id] = stripHtml(block.element);
+          }
+        });
+        setTextareaValues(initialValues);
+      } catch (err: unknown) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     if (!contId) {
@@ -72,6 +101,16 @@ const OcrResultPage = () => {
       .replace(/<br\s*\/?>/gi, "\n")
       .replace(/<[^>]+>/g, "")
       .trim();
+
+  const restoreLineBreaks = (text: string) =>
+    text.replace(/\n/g, '<br>');
+
+  const handleTableBlur = (idx: number, element: HTMLDivElement | null) => {
+    if (!element) return;
+    const updated = [...blocks];
+    updated[idx] = { ...updated[idx], element: element.innerHTML || '' };
+    setBlocks(updated);
+  };
 
   const pageVariants = {
     initial: { opacity: 1 },
@@ -130,7 +169,10 @@ const OcrResultPage = () => {
                             <div
                               key={block.id}
                               onFocus={() => setEditingIdx(idx)}
-                              onBlur={() => setEditingIdx(null)}
+                              onBlur={(e) => {
+                                setEditingIdx(null);
+                                handleTableBlur(idx, e.currentTarget as HTMLDivElement);
+                              }}
                               className="ocr-table bg-[#F8F8F8] my-6 overflow-x-auto font-medium focus:outline-none"
                               contentEditable
                               dangerouslySetInnerHTML={{ __html: clean }}
@@ -149,10 +191,16 @@ const OcrResultPage = () => {
                           } as React.CSSProperties}
                         >
                           <textarea
-                            value={stripHtml(raw)}
+                            value={textareaValues[block.id] || ''}
                             onChange={(e) => {
+                              const newValue = e.target.value;
+                              setTextareaValues(prev => ({
+                                ...prev,
+                                [block.id]: newValue
+                              }));
+                              
                               const updated = [...blocks];
-                              updated[idx] = { ...updated[idx], element: e.target.value };
+                              updated[idx] = { ...updated[idx], element: restoreLineBreaks(newValue) };
                               setBlocks(updated);
                               adjustHeight(e.target);
                             }}
@@ -161,7 +209,10 @@ const OcrResultPage = () => {
                             onInput={(e) => adjustHeight(e.currentTarget)}
                             ref={(el) => { if (el) adjustHeight(el); }}
                             className="w-full bg-[#F8F8F8] rounded-lg p-3 text-sm font-medium text-[#1A1A1A] focus:outline-none overflow-hidden"
-                            style={{ resize: 'none' }}
+                            style={{ 
+                              resize: 'none',
+                              whiteSpace: 'pre-wrap'
+                            }}
                           />
                         </div>
                       );
