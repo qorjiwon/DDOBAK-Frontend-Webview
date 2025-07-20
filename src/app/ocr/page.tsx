@@ -31,6 +31,7 @@ const OcrResultPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [showAnalyzing, setShowAnalyzing] = useState(false);
   const [textareaValues, setTextareaValues] = useState<{ [key: string]: string }>({});
+  const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
     if (!contId) {
@@ -44,7 +45,6 @@ const OcrResultPage = () => {
         const data: ContractOcrHtml = res.data;
         setBlocks(data.htmlArray);
 
-        // textarea 초기값 설정
         const initialValues: { [key: string]: string } = {};
         data.htmlArray.forEach(block => {
           if (!block.element.toLowerCase().startsWith("<table")) {
@@ -52,6 +52,10 @@ const OcrResultPage = () => {
           }
         });
         setTextareaValues(initialValues);
+
+        setTimeout(() => {
+          setAnimationComplete(true);
+        }, data.htmlArray.length * 250 + 500);
       } catch (err: unknown) {
         console.error(err);
       } finally {
@@ -175,7 +179,7 @@ const OcrResultPage = () => {
                         return (
                           <div
                             key={block.id}
-                            className="ocr-block"
+                            className={animationComplete ? "opacity-100" : "ocr-block"}
                             style={{
                               '--delay': `${idx * 0.25}s`,
                               '--target-opacity': editingIdx !== null && editingIdx !== idx ? '0.3' : '1'
