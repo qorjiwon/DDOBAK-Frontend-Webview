@@ -49,6 +49,12 @@ export default function Home() {
       >
         테스트 페이지로 이동
       </Link>
+      <Link
+        href={`/guide`}
+        className="px-4 py-3 bg-[#1F79FF] text-sm text-white rounded-lg hover:bg-blue-700"
+      >
+        계약서 가이드 - 사회 초년생을 위한 계약서 이해하기
+      </Link>
     </div>
   );
 }

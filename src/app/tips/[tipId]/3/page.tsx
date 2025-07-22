@@ -2,13 +2,11 @@ import React from 'react';
 
 const PDFFirstAlba: React.FC = () => (
   <div className="container">
+    <h1 className="heading">💡첫 알바 근로계약서라면? 이런 조항을 주의하세요!</h1>
     <aside className="note">
       <div className="imoji">✨</div>
       <div className="text">
-        <p><strong>첫 알바 근로계약서라면? 이런 조항을 주의하세요!</strong></p>
-        <p>처음 하는 아르바이트, 설렘 반 걱정 반이죠?</p>
-        <p>하지만 근로계약서는 &apos;그냥 서명하고 끝&apos;이 아닙니다.</p>
-        <p>나중에 임금 문제, 부당 해고, 초과 근무 등에서 <strong>불이익을 당하지 않으려면</strong>, 이 조항들 꼭! 체크하고 넘어가세요 👀</p>
+        <p>처음 하는 아르바이트, 설렘 반 걱정 반이죠? 하지만 근로계약서는 &apos;그냥 서명하고 끝&apos;이 아닙니다. 나중에 <u>임금 문제, 부당 해고, 초과 근무 등</u>에서 <strong>불이익을 당하지 않으려면</strong>, 이 조항들 꼭! 체크하고 넘어가세요 👀</p>
       </div>
     </aside>
 
