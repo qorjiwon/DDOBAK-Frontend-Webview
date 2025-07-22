@@ -10,6 +10,12 @@ import { ChevronDown } from 'lucide-react'
 import { createPortal } from 'react-dom'
 import { fetchContractAnalysis } from '@/api/api'
 import { RevealOnScroll } from '@/components/RevealOnScroll'
+import MiniDdoBak from '@/components/mini-ddobak';
+import GlassesDdobak from '@/components/glasses-ddobak';
+import SpeechBubble from '@/components/speech-bubble'
+import MoreThanTwoFound from '@/components/more-than-two-found';
+import TwoFound from '@/components/two-found';
+import OneFound from '@/components/one-found';
 
 const ClientAnalysis = dynamic(
     () => Promise.resolve(ContractAnalysis),
@@ -68,12 +74,14 @@ const ContractAnalysis: React.FC = () => {
     }
 
     return (
-        <div className="bg-[#F8F8F8] font-sans text-sm text-gray-800 overflow-hidden">
-            <img
-                className="w-full"
-                src="/many-found.svg"
-                alt="또박이"
-            />
+        <div className="font-sans text-sm text-gray-800 overflow-hidden">
+            {data?.toxics && data.toxics.length > 2
+                ? <MoreThanTwoFound />
+                : data?.toxics.length == 2
+                    ? <TwoFound />
+                    : <OneFound />
+            }
+
             {/* Header */}
             <div className="pt-9 text-center">
                 <p className="text-[#9E9E9E] font-bold">이 계약서에서 발견된 독소조항은</p>
@@ -83,12 +91,12 @@ const ContractAnalysis: React.FC = () => {
             <div className="mt-9 mx-5 space-y-[39px]">
                 {/* Summary Card */}
                 <RevealOnScroll>
-                    <div className="bg-[#FCFCFC] rounded-xl py-6 px-6 font-medium">
+                    <div className="bg-[#FCFCFC] border border-[#E4E4E4] rounded-xl py-6 px-6 font-medium">
                         <h3 className="text-base font-bold text-[#616161] mb-2">요약</h3>
                         <p>
                             {data?.summary || "분석 결과를 불러오지 못했습니다."}
                         </p>
-                </div>
+                    </div>
                 </RevealOnScroll>
 
                 {/* Note Box */}
@@ -98,17 +106,13 @@ const ContractAnalysis: React.FC = () => {
                             또박이 한마디
                         </div>
                         <p className="mt-1 text-[#1F79FF] font-medium">
-                        {data ? `“${data?.ddobakCommentary.overallComment}”` : "..."}
-                    </p>
-                </div>
-                </RevealOnScroll>   
+                            {data ? `“${data?.ddobakCommentary.overallComment}”` : "..."}
+                        </p>
+                    </div>
+                </RevealOnScroll>
 
                 <RevealOnScroll>
-                    <img
-                        className="w-[162px] mx-[50vw] -mt-12"
-                        src="/mini-ddobak.svg"
-                        alt="안경 쓴 또박이"
-                    />
+                    <MiniDdoBak />
                 </RevealOnScroll>
             </div>
 
@@ -116,14 +120,14 @@ const ContractAnalysis: React.FC = () => {
             <div className="bg-[#616161] px-5 py-[28px] space-y-2">
 
                 {/* Warning Summary */}
-                
+
                 <RevealOnScroll>
-                <div className="border-[#FF4949] border bg-[#FFF6F6] rounded-lg p-4 grow basis-0">
-                    <h4 className="text-[#FF4949] font-bold">주의 조항 요약</h4>
-                    <p className="mt-2 text-[#FF4949] font-medium">
-                        {data ? `“${data?.ddobakCommentary.warningComment}”` : ''}
-                    </p>
-                </div>
+                    <div className="border-[#FF4949] border bg-[#FFF6F6] rounded-lg p-4 grow basis-0">
+                        <h4 className="text-[#FF4949] font-bold">주의 조항 요약</h4>
+                        <p className="mt-2 text-[#FF4949] font-medium">
+                            {data ? `“${data?.ddobakCommentary.warningComment}”` : ''}
+                        </p>
+                    </div>
                 </RevealOnScroll>
 
 
@@ -139,7 +143,7 @@ const ContractAnalysis: React.FC = () => {
 
             {/* Advice Box */}
             <RevealOnScroll>
-                <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-4 mt-6 text-[#1F79FF] space-y-2">
+                <div className="border-[#1F79FF] border bg-[#F4F8FF] rounded-lg p-4 mx-5 mt-6 text-[#1F79FF] space-y-2">
                     <h5 className="font-bold">또박이의 조언</h5>
                     <p className="mt-1 font-medium">
                         {data ? `“${data?.ddobakCommentary.advice}”` : "..."}
@@ -148,17 +152,9 @@ const ContractAnalysis: React.FC = () => {
             </RevealOnScroll>
 
             <div className="flex justify-between items-end h-23 mx-4">
-                <img
-                    className="w-[162px] h-[84px] -mx-2"
-                    src="/glasses-ddobak.svg"
-                    alt="안경 쓴 또박이"
-                />
-                <div className="w-full flex justify-center">
-                    <img
-                        className="speech-bubble-float"
-                        src="/speech-bubble.svg"
-                        alt="말풍선"
-                    />
+                <GlassesDdobak />
+                <div className="w-full h-auto flex justify-center">
+                    <SpeechBubble />
                 </div>
             </div>
 
@@ -218,7 +214,7 @@ const ToxicCard: React.FC<{ idx: number; item: Toxic }> = ({ idx, item }) => {
     }, [selected]);
 
     return (
-        <div className="bg-white rounded-xl p-6 font-medium space-y-3">
+        <div className="bg-white rounded-xl px-[17px] py-[18px] font-medium space-y-3">
             <h4 className="text-[#616161] text-base space-x-3">
                 <span className='font-bold'>
                     주의 조항 {String.fromCharCode(9312 + idx)}
