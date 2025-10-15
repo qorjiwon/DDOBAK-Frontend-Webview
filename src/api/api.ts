@@ -21,19 +21,43 @@ function isLocalRuntime(): boolean {
 
 const LOCAL_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
+declare global {
+  interface Window {
+    __BRIDGE_TOKEN__?: string | null;
+    __SET_BRIDGE_TOKEN__?: (t: string | null) => void;
+  }
+}
+
+let BRIDGE_TOKEN: string | null = null;
+
+export function setBridgeToken(t: string | null) {
+  BRIDGE_TOKEN = t ?? null;
+}
+
+(function bootstrapBridgeToken() {
+  if (typeof window === 'undefined') return;
+
+  if (typeof window.__BRIDGE_TOKEN__ !== 'undefined') {
+    setBridgeToken(window.__BRIDGE_TOKEN__ ?? null);
+    try { window.__BRIDGE_TOKEN__ = null; } catch { }
+  }
+
+  window.__SET_BRIDGE_TOKEN__ = (t: string | null) => {
+    setBridgeToken(t);
+  };
+})();
+
 async function apiFetch<T = unknown>(
   path: string,
   init: RequestInit & { json?: unknown } = {}
 ): Promise<T> {
   const { json, headers: initHeaders, body: initBody, ...rest } = init;
 
-  // 1) 헤더 구성
   const headers: Record<string, string> = {
     ...getCsrfHeader(),
     ...(initHeaders as Record<string, string> | undefined),
   };
 
-  // 2) body 선택 (json 우선)
   const usingJson = json !== undefined;
   const body: BodyInit | null | undefined = usingJson
     ? (JSON.stringify(json) as BodyInit)
@@ -48,8 +72,10 @@ async function apiFetch<T = unknown>(
     headers['Content-Type'] = headers['Content-Type'] ?? 'application/json';
   }
 
-  if (isLocalRuntime() && LOCAL_API_KEY && !('Authorization' in headers)) {
+  if (isLocalRuntime() && LOCAL_API_KEY) {
     headers.Authorization = `Bearer ${LOCAL_API_KEY}`;
+  } else if (BRIDGE_TOKEN) {
+    headers.Authorization = `Bearer ${BRIDGE_TOKEN}`;
   }
 
   const res = await fetch(`${API_BASE_PATH}${path}`, {
@@ -86,7 +112,6 @@ async function apiFetch<T = unknown>(
 }
 
 // ----------------- 타입 정의 -----------------
-
 export interface ContractAnalysisResponse {
   success: boolean;
   code?: string;
@@ -105,7 +130,6 @@ export interface CreateAnalysisRequest {
 }
 
 // ----------------- API 함수 -----------------
-
 export async function fetchContractAnalysis(
   contractId: string,
   analysisId: string
