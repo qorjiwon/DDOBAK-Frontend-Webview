@@ -1,3 +1,5 @@
+import type { ContractAnalysisResponse, ContractOcrResponse, CreateAnalysisRequest } from '@/types/api';
+
 const API_BASE_PATH = process.env.NEXT_PUBLIC_API_BASE_URL!;
 if (!API_BASE_PATH) {
   throw new Error('ENV missing: NEXT_PUBLIC_API_BASE_URL');
@@ -80,7 +82,7 @@ async function apiFetch<T = unknown>(
 
   const res = await fetch(`${API_BASE_PATH}${path}`, {
     ...rest,
-    credentials: 'include',
+    credentials: 'omit',
     headers,
     body,
   });
@@ -97,39 +99,9 @@ async function apiFetch<T = unknown>(
 
   const jsonData = (await res.json()) as unknown;
 
-  if (
-    typeof jsonData === 'object' &&
-    jsonData !== null &&
-    'success' in jsonData &&
-    Object.prototype.hasOwnProperty.call(jsonData, 'success') &&
-    !(jsonData as { success: boolean }).success
-  ) {
-    const j = jsonData as { code?: string; message?: string };
-    throw new Error(`API error [code=${j.code ?? 'UNKNOWN'}]: ${j.message ?? 'Unknown API error'}`);
-  }
-
   return jsonData as T;
 }
 
-// ----------------- 타입 정의 -----------------
-export interface ContractAnalysisResponse {
-  success: boolean;
-  code?: string;
-  message?: string;
-  data: unknown;
-}
-export interface ContractOcrResponse {
-  success: boolean;
-  code?: string;
-  message?: string;
-  data: unknown;
-}
-export interface CreateAnalysisRequest {
-  contractId: string;
-  ocrSucceeded: string;
-}
-
-// ----------------- API 함수 -----------------
 export async function fetchContractAnalysis(
   contractId: string,
   analysisId: string
