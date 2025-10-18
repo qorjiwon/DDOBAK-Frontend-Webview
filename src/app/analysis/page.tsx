@@ -85,7 +85,7 @@ const ContractAnalysis: React.FC = () => {
             {/* Header */}
             <div className="pt-9 text-center">
                 <p className="text-[#9E9E9E] font-bold">이 계약서에서 발견된 독소조항은</p>
-                <p className="mt-2 text-3xl font-bold text-blue-600">3개</p>
+                <p className="mt-2 text-3xl font-bold text-blue-600">{data?.toxics.length || 0}개</p>
             </div>
 
             <div className="mt-9 mx-5 space-y-[39px]">
