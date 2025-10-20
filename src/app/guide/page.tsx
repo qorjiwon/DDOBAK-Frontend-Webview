@@ -39,7 +39,7 @@ const Guide: React.FC = () => {
                 {/* Section 1 */}
                 <section className="mb-8 bg-white rounded-2xl p-6 shadow-sm">
                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">
-                        시작 전에
+                        서비스 이용 전, 꼭 알아두세요!
                     </h2>
                     <ul className="space-y-3 text-sm sm:text-base leading-relaxed whitespace-pre-line break-keep">
                         <li className="flex flex-col sm:flex-row gap-1">
