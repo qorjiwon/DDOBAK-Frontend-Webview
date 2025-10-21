@@ -1,5 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD
 import Image from 'next/image';
+=======
+>>>>>>> upstream/main
 
 const ContractClauses: React.FC = () => (
   <div className="container">
@@ -99,12 +102,19 @@ const ContractClauses: React.FC = () => (
         target="_blank"
         rel="noopener noreferrer"
       >
+<<<<<<< HEAD
         <Image
           className="link-icon"
           src="/link-icon.svg"
           alt="링크 아이콘"
           width={16}
           height={16}
+=======
+        <img
+          className="link-icon"
+          src="/link-icon.svg"
+          alt="링크 아이콘"
+>>>>>>> upstream/main
         />
         <span className="link-text">www.hankyung.com</span>
       </a></p>
