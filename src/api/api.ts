@@ -146,28 +146,3 @@ export async function updateContractOcr(
     json: { id: blockId, element },
   });
 }
-
-export async function updateContractOcr(contractId: string, blockId: string, element: string) {
-  try {
-    const response = await fetch(`${API_BASE_PATH}/contract/ocr/${contractId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${API_KEY}`,
-      },
-      body: JSON.stringify({
-        id: blockId,
-        element: element,
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error('OCR 결과 업데이트 실패');
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('OCR 업데이트 오류:', error);
-    throw error;
-  }
-};
