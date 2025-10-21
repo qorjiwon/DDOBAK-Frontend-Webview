@@ -1,6 +1,5 @@
 import React from "react";
 import FAQSection from "./FAG";
-import { Archive } from "lucide-react";
 
 const Img = ({ src, alt }: { src?: string; alt: string }) =>
     src ? (
@@ -36,7 +35,6 @@ const Guide: React.FC = () => {
                         계약서를 쉽고 안전하게 확인하는 가장 간단한 방법
                     </p>
                 </header>
-
                 <section className="mb-8 bg-white rounded-2xl p-6 shadow-sm">
                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">
                         서비스 이용 전, 꼭 알아두세요!
