@@ -14,9 +14,9 @@ const Img = ({ src, alt }: { src?: string; alt: string }) =>
 
 const Guide: React.FC = () => {
     const images = {
-        upload: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F1fade644-01e7-4055-a7ec-fa37733cd63e%2Fimage.png/size/w=480?exp=1760954067&sig=HmFcp7L3Mkj1ar9Hmys-Bl1LTN4CQacWgSY9prhVt4U&id=2927220c-4421-8057-bc85-f75acdaf8aba&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        mask: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2Fe633251d-ac03-42e0-8bd0-47eeb921cbec%2Fimage.png/size/w=480?exp=1760954017&sig=QWgt0jneOiJreuCZNpEZsMoqSdymeudCx9oGQ0ezV5w&id=2927220c-4421-8027-aeef-c2e06dd0eb5d&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        preview: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F8492b7ec-d5ab-4d99-a581-504c44f63e0c%2Fimage.png/size/w=480?exp=1760954084&sig=hc9lRlWNZh2DQ-hK6aF0okWo3cEFDOLe8bYRQwBtQww&id=2927220c-4421-808d-a1fa-c8947882a1de&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
+        upload: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F1fade644-01e7-4055-a7ec-fa37733cd63e%2Fimage.png/size/w=2000?exp=1761114062&sig=bXJwgemniIeJcji6qeLtkJViKhGUUaZrraeYn4kabwA&id=2927220c-4421-8057-bc85-f75acdaf8aba&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
+        mask: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2Fe633251d-ac03-42e0-8bd0-47eeb921cbec%2Fimage.png/size/w=2000?exp=1761114098&sig=JfFrY3pSsrozdZTa8fNOAEM0ClXodUJqqizBHhPGFYI&id=2927220c-4421-8027-aeef-c2e06dd0eb5d&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
+        preview: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2Fe633251d-ac03-42e0-8bd0-47eeb921cbec%2Fimage.png/size/w=2000?exp=1761114098&sig=JfFrY3pSsrozdZTa8fNOAEM0ClXodUJqqizBHhPGFYI&id=2927220c-4421-8027-aeef-c2e06dd0eb5d&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
         analyze: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F60e3e7fe-5354-4fba-8862-f5f7ef19d9da%2Fimage.png/size/w=2000?exp=1761040440&sig=ns2B_o2AP0UakH06vwwvlebSOlu-d2qO5Ey_-unTa5Y&id=2927220c-4421-8029-8f60-c857ea4dbfd0&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
         summary: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F2b81e456-6d33-4fb3-addc-070d398e64a8%2Fimage.png/size/w=2000?exp=1761040471&sig=vLITfkxqYTmItgy8Njt60kokVeUzYx1tx89RQLZ2aik&id=2927220c-4421-8004-8047-fb1e1e816825&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
         detail: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F680d3686-f695-4213-b641-9ff249936fba%2Fimage.png/size/w=2000?exp=1761040783&sig=ZtPRR1BpcCPK9dDmJHDCb3-eO4OPp0zDsfPxj_PY6dY&id=2927220c-4421-8031-83d9-d2fe8bc4124d&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
@@ -26,7 +26,6 @@ const Guide: React.FC = () => {
     return (
         <div className="min-h-screen bg-neutral-50 px-4 sm:px-6 py-10">
             <div className="max-w-2xl mx-auto text-neutral-800">
-                {/* Header */}
                 <header className="mb-10 text-center">
                     <h1 className="text-3xl font-bold text-neutral-900 mb-2">
                         또박 이용 가이드
@@ -36,7 +35,6 @@ const Guide: React.FC = () => {
                     </p>
                 </header>
 
-                {/* Section 1 */}
                 <section className="mb-8 bg-white rounded-2xl p-6 shadow-sm">
                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">
                         서비스 이용 전, 꼭 알아두세요!
@@ -60,7 +58,6 @@ const Guide: React.FC = () => {
                     </ul>
                 </section>
 
-                {/* Section 2 */}
                 <section className="mb-8 bg-white rounded-2xl p-6 shadow-sm">
                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">
                         분석 과정 한 눈에 보기 👀
@@ -79,7 +76,6 @@ const Guide: React.FC = () => {
                     </ol>
                 </section>
 
-                {/* Section 3 */}
                 <section className="mb-8 bg-white rounded-2xl p-6 shadow-sm">
                     <h2 className="text-lg font-semibold text-neutral-900 mb-6">
                         1단계. 계약서 업로드 &amp; OCR
@@ -104,7 +100,6 @@ const Guide: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Section 4 */}
                 <section className="mb-8 bg-white rounded-2xl p-6 shadow-sm">
                     <h2 className="text-lg font-semibold text-neutral-900 mb-6">
                         2단계. 분석 결과 보기
@@ -135,6 +130,39 @@ const Guide: React.FC = () => {
                         </div>
                     </div>
                 </section>
+
+                <section className="mb-8 bg-white rounded-2xl p-6 shadow-sm">
+                    <h2 className="text-lg font-semibold text-neutral-900 mb-6">
+                        3단계. 결과 아카이브 확인 📁
+                    </h2>
+                    <div className="space-y-8 text-sm sm:text-base leading-relaxed break-keep">
+                        <div>
+                            <p>
+                                ① 분석이 완료된 계약서는 <span className="font-semibold">자동으로 아카이브에 저장</span>됩니다.
+                                마이페이지에서 언제든 다시 열람할 수 있습니다.
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                ② 각 문서는 요약 카드·위험 조항·PDF 파일 등 분석 결과를 그대로 보관합니다.
+                                원본 이미지는 별도 다운로드 없이 즉시 확인 가능합니다.
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                ③ 아카이브에서 불필요한 문서는 <span className="font-semibold">삭제</span>할 수 있으며,
+                                삭제된 문서는 복구되지 않습니다.
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                ④ 보관 중인 모든 문서는 안전하게 암호화되어 저장되며,{" "}
+                                <span className="font-semibold">본인만 접근</span>할 수 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
 
                 <section className="mb-8 grid gap-6 sm:grid-cols-2">
                     <FAQSection />
