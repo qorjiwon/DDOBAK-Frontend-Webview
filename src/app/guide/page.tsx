@@ -18,10 +18,10 @@ const Guide: React.FC = () => {
         mask: "https://velog.velcdn.com/images/wldnjsl2001/post/b165e4d6-b170-46df-a87d-0badba48d934/image.png",
         preview: "https://velog.velcdn.com/images/wldnjsl2001/post/e6424833-cb83-4eab-acd2-7cd19dd5b1bb/image.png",
         analyze: "https://velog.velcdn.com/images/wldnjsl2001/post/df10cf18-3d5e-49b0-bcb5-48239ecc0278/image.png",
-        summary: "https://velog.velcdn.com/images/wldnjsl2001/post/af307f8c-d5d7-484e-90ec-241a81da54e8/image.png",
-        detail: "https://velog.velcdn.com/images/wldnjsl2001/post/befaae56-d486-476b-84a4-904ed623ce0b/image.png",
+        summary: "https://velog.velcdn.com/images/wldnjsl2001/post/baf934bf-6486-4070-a9d3-2f8367a489fd/image.png",
+        detail: "https://velog.velcdn.com/images/wldnjsl2001/post/64388114-ba81-4d28-8ba1-1bcb5baa31c4/image.png",
         export: "https://velog.velcdn.com/images/wldnjsl2001/post/ae67e9ec-40ac-46ac-bd11-81ab01c0d98a/image.png",
-        archive: "https://velog.velcdn.com/images/wldnjsl2001/post/e05e48c1-dddc-4ef2-9643-dcc25392f1fb/image.png" // same as export? update if different
+        archive: "https://velog.velcdn.com/images/wldnjsl2001/post/e05e48c1-dddc-4ef2-9643-dcc25392f1fb/image.png",
     };
 
 
