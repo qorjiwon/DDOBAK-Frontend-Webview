@@ -17,13 +17,12 @@ const Guide: React.FC = () => {
         upload: "https://velog.velcdn.com/images/wldnjsl2001/post/590d11c7-2f8e-43f1-b519-8c705cc79d8f/image.png",
         mask: "https://velog.velcdn.com/images/wldnjsl2001/post/b165e4d6-b170-46df-a87d-0badba48d934/image.png",
         preview: "https://velog.velcdn.com/images/wldnjsl2001/post/e6424833-cb83-4eab-acd2-7cd19dd5b1bb/image.png",
-        analyze: "https://velog.velcdn.com/images/wldnjsl2001/post/df10cf18-3d5e-49b0-bcb5-48239ecc0278/image.png",
+        analyze: "https://velog.velcdn.com/images/wldnjsl2001/post/0c57522d-315a-4545-8bcd-d82637550ac5/image.png",
         summary: "https://velog.velcdn.com/images/wldnjsl2001/post/baf934bf-6486-4070-a9d3-2f8367a489fd/image.png",
-        detail: "https://velog.velcdn.com/images/wldnjsl2001/post/64388114-ba81-4d28-8ba1-1bcb5baa31c4/image.png",
+        detail: "https://velog.velcdn.com/images/wldnjsl2001/post/c6e653fa-2b66-47bd-a51b-99b2433cff6f/image.png",
         export: "https://velog.velcdn.com/images/wldnjsl2001/post/ae67e9ec-40ac-46ac-bd11-81ab01c0d98a/image.png",
         archive: "https://velog.velcdn.com/images/wldnjsl2001/post/e05e48c1-dddc-4ef2-9643-dcc25392f1fb/image.png",
     };
-
 
     return (
         <div className="min-h-screen bg-neutral-50 px-4 sm:px-6 py-10">
