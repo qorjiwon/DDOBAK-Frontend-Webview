@@ -14,15 +14,16 @@ const Img = ({ src, alt }: { src?: string; alt: string }) =>
 
 const Guide: React.FC = () => {
     const images = {
-        upload: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F1fade644-01e7-4055-a7ec-fa37733cd63e%2Fimage.png/size/w=2000?exp=1761151130&sig=mrihwvJQjRRR_79s-U72NEXGtBX1hoO5W3FRf4MWTHg&id=2927220c-4421-8057-bc85-f75acdaf8aba&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        mask: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2Fe633251d-ac03-42e0-8bd0-47eeb921cbec%2Fimage.png/size/w=2000?exp=1761151176&sig=fCAU_TpOdDzHmM8vyBeN7WdkYcV35VaaLtF-5hXb2Qg&id=2927220c-4421-8027-aeef-c2e06dd0eb5d&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        preview: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F8492b7ec-d5ab-4d99-a581-504c44f63e0c%2Fimage.png/size/w=2000?exp=1761151200&sig=bBwYhuGubdFC71w49UqHUI6S5xZHKYc3Jq0wMi73MHU&id=2927220c-4421-808d-a1fa-c8947882a1de&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        analyze: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F60e3e7fe-5354-4fba-8862-f5f7ef19d9da%2Fimage.png/size/w=2000?exp=1761040440&sig=ns2B_o2AP0UakH06vwwvlebSOlu-d2qO5Ey_-unTa5Y&id=2927220c-4421-8029-8f60-c857ea4dbfd0&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        summary: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F2b81e456-6d33-4fb3-addc-070d398e64a8%2Fimage.png/size/w=2000?exp=1761040471&sig=vLITfkxqYTmItgy8Njt60kokVeUzYx1tx89RQLZ2aik&id=2927220c-4421-8004-8047-fb1e1e816825&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        detail: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F680d3686-f695-4213-b641-9ff249936fba%2Fimage.png/size/w=2000?exp=1761040783&sig=ZtPRR1BpcCPK9dDmJHDCb3-eO4OPp0zDsfPxj_PY6dY&id=2927220c-4421-8031-83d9-d2fe8bc4124d&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        export: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F9ed90067-be26-4004-8ec2-a16b15a13940%2F09f444ea-28d1-4b28-86f2-1728c171308e.png/size/w=2000?exp=1761040963&sig=6ydQ2faD7th8coSAkJyjrZzQGI7-C5e_eZhSx1iWgD8&id=2927220c-4421-801f-bd11-e32635092372&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80",
-        archive: "https://img.notionusercontent.com/s3/prod-files-secure%2F2b838b61-8caf-43f8-8a43-aac6045ed11d%2F6531f4f3-3c69-4ed3-b31f-aca96a63d02c%2Fd75bfc73-00b6-4e9b-8672-7b1a14a07aa4.png/size/w=2000?exp=1761151508&sig=Wl6uNaEhzRfKNN9R_Z8PeYho2lNOl0OBhkx6aw9iPag&id=2937220c-4421-8005-8ab1-c94e83e3948c&table=block&userId=d77bda8f-addc-4a39-a464-fb8b420def80"
+        upload: "https://velog.velcdn.com/images/wldnjsl2001/post/590d11c7-2f8e-43f1-b519-8c705cc79d8f/image.png",
+        mask: "https://velog.velcdn.com/images/wldnjsl2001/post/b165e4d6-b170-46df-a87d-0badba48d934/image.png",
+        preview: "https://velog.velcdn.com/images/wldnjsl2001/post/e6424833-cb83-4eab-acd2-7cd19dd5b1bb/image.png",
+        analyze: "https://velog.velcdn.com/images/wldnjsl2001/post/df10cf18-3d5e-49b0-bcb5-48239ecc0278/image.png",
+        summary: "https://velog.velcdn.com/images/wldnjsl2001/post/af307f8c-d5d7-484e-90ec-241a81da54e8/image.png",
+        detail: "https://velog.velcdn.com/images/wldnjsl2001/post/befaae56-d486-476b-84a4-904ed623ce0b/image.png",
+        export: "https://velog.velcdn.com/images/wldnjsl2001/post/ae67e9ec-40ac-46ac-bd11-81ab01c0d98a/image.png",
+        archive: "https://velog.velcdn.com/images/wldnjsl2001/post/e05e48c1-dddc-4ef2-9643-dcc25392f1fb/image.png" // same as export? update if different
     };
+
 
     return (
         <div className="min-h-screen bg-neutral-50 px-4 sm:px-6 py-10">
